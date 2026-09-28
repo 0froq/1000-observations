@@ -2,8 +2,8 @@ import type { ProductConfig } from './types'
 
 export default defineAppConfig({
   product: {
-    name: '1000',
-    mark: 'o',
+    name: '1000o',
+    mark: '.',
     theme: {
       light: {
         bg: '#f4f2ec',

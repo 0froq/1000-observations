@@ -1,4 +1,4 @@
-# 1000o
+# 1000o.
 
 froQ’s notebook of personal websites and design worth admiring — up to 1000 short notes. This is a skeleton: about 30 entries, each marked **Placeholder**. The views are built for the full thousand (load more, tag filters, search, a pen progress mark at N / 1000).
 
