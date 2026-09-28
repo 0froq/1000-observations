@@ -20,13 +20,13 @@ useSeoMeta({ description: () => t('obs.indexLede') })
 <template>
   <Sheet line>
     <PageHead
+      class="is-screen"
       :kicker="copy('obs.kicker')"
       kicker-name="obs.kicker"
       :title="copy('obs.indexTitle')"
       title-name="obs.indexTitle"
       :lede="copy('obs.indexLede')"
       lede-name="obs.indexLede"
-      compact
     >
       <template #meta>
         <ObsProgress :count="count" />
