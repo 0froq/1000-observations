@@ -1,15 +1,15 @@
 {
   "site": {
-    "title": "1000 Personal Website Observations",
+    "title": "1000o",
     "skip": "Skip to content",
-    "footer": "froQ · notebook of personal-site notes"
+    "footer": "froQ · notes on sites worth keeping"
   },
   "theme": {
     "dark": "Dark",
     "light": "Light"
   },
   "nav": {
-    "observations": "Observations",
+    "observations": "Notes",
     "tags": "Tags",
     "sites": "Sites",
     "about": "About",
@@ -24,40 +24,40 @@
   },
   "obs": {
     "kicker": "Personal sites",
-    "indexTitle": "1000 observations",
-    "indexLede": "Numbered short notes on what stands out on personal websites. Skeleton placeholders for now.",
+    "indexTitle": "Sites worth looking at.",
+    "indexLede": "Numbered notes on personal websites and the design that makes them feel considered. A notebook of things worth admiring. Placeholders for now.",
     "search": "Search",
-    "searchPlaceholder": "Titles, summaries, site names…",
+    "searchPlaceholder": "Titles, notes, or site names…",
     "sort": "Sort",
     "sortNumber": "By number",
     "sortNewest": "Newest",
     "filterTags": "Filter by tag",
     "clearTags": "Clear tags",
-    "empty": "No observations match.",
+    "empty": "Nothing matches.",
     "read": "Read",
     "loadMore": "Load {n} more",
-    "back": "All observations",
+    "back": "All notes",
     "prev": "Previous",
     "next": "Next",
     "tags": "Tags",
-    "related": "Related",
-    "observedSite": "Observed",
+    "related": "More in this vein",
+    "observedSite": "Site",
     "tagsTitle": "Tags",
-    "tagsLede": "A small vocabulary; multi-select syncs to the URL.",
-    "tagLede": "Entries tagged “{tag}”.",
+    "tagsLede": "A small vocabulary for what caught the eye.",
+    "tagLede": "Notes that linger on {tag}.",
     "allTags": "All tags",
-    "sitesTitle": "Observed sites",
-    "sitesLede": "Grouped by URL with counts.",
+    "sitesTitle": "The sites",
+    "sitesLede": "Personal sites collected here, grouped by URL.",
     "sitesCount": "{n} sites",
-    "entryCount": "{n} entries",
+    "entryCount": "{n} notes",
     "aboutTitle": "About",
-    "aboutLede": "About this project (placeholder).",
-    "aboutPlaceholder": "Why froQ collects these notes, how to contribute, contact — TBD.",
+    "aboutLede": "A notebook, not a scorecard.",
+    "aboutPlaceholder": "Placeholder. 1000o is froQ’s notebook of personal websites and design worth admiring — up to a thousand short notes. What to write, and how to send one in, still to be decided.",
     "feed": "RSS"
   },
   "notFound": {
     "title": "Not found",
-    "lede": "That number or link may not exist yet.",
-    "back": "Back to home"
+    "lede": "That number may not be written yet.",
+    "back": "Back to the notes"
   }
 }

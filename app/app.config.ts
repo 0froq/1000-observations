@@ -3,7 +3,7 @@ import type { ProductConfig } from './types'
 export default defineAppConfig({
   product: {
     name: '1000',
-    mark: '观',
+    mark: 'o',
     theme: {
       light: {
         bg: '#f4f2ec',

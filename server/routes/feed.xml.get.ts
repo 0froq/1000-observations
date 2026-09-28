@@ -30,9 +30,9 @@ export default defineEventHandler(async (event) => {
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0">
   <channel>
-    <title>1000 Personal Website Observations</title>
+    <title>1000o</title>
     <link>${siteUrl}</link>
-    <description>Short notes on personal websites.</description>
+    <description>Short notes on personal websites and design worth admiring.</description>
     ${entries}
   </channel>
 </rss>`

@@ -61,7 +61,7 @@ export default defineNuxtConfig({
       { code: 'en', language: 'en', name: 'English', file: 'en.json' },
       { code: 'zh', language: 'zh-CN', name: '中文', file: 'zh.json' },
     ],
-    defaultLocale: 'zh',
+    defaultLocale: 'en',
     strategy: 'prefix_except_default',
     detectBrowserLanguage: false,
   },
@@ -69,7 +69,7 @@ export default defineNuxtConfig({
   nitro: {
     prerender: {
       crawlLinks: true,
-      routes: ['/', '/en', '/feed.xml'],
+      routes: ['/', '/zh', '/feed.xml'],
     },
   },
 
