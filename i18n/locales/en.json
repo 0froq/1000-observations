@@ -1,17 +1,18 @@
 {
   "site": {
-    "title": "",
+    "title": "1000 Personal Website Observations",
     "skip": "Skip to content",
-    "footer": ""
+    "footer": "froQ · notebook of personal-site notes"
   },
   "theme": {
     "dark": "Dark",
     "light": "Light"
   },
   "nav": {
-    "docs": "Docs",
-    "notes": "Notes",
-    "changelog": "Changelog",
+    "observations": "Observations",
+    "tags": "Tags",
+    "sites": "Sites",
+    "about": "About",
     "sections": "On this page"
   },
   "install": {
@@ -21,33 +22,42 @@
     "copy": "Copy",
     "copied": "Copied"
   },
-  "notes": {
-    "label": "Notes",
-    "title": "",
-    "lede": "",
-    "count": "{n} notes",
+  "obs": {
+    "kicker": "Personal sites",
+    "indexTitle": "1000 observations",
+    "indexLede": "Numbered short notes on what stands out on personal websites. Skeleton placeholders for now.",
+    "search": "Search",
+    "searchPlaceholder": "Titles, summaries, site names…",
+    "sort": "Sort",
+    "sortNumber": "By number",
+    "sortNewest": "Newest",
+    "filterTags": "Filter by tag",
+    "clearTags": "Clear tags",
+    "empty": "No observations match.",
     "read": "Read",
-    "minutes": "{n} min read",
-    "back": "All notes",
-    "next": "Next note",
-    "end": ""
-  },
-  "changelog": {
-    "label": "Changelog",
-    "title": "",
-    "lede": "",
-    "count": "{n} releases",
-    "latest": "latest",
-    "end": ""
-  },
-  "docs": {
-    "label": "Docs",
+    "loadMore": "Load {n} more",
+    "back": "All observations",
     "prev": "Previous",
-    "next": "Next"
+    "next": "Next",
+    "tags": "Tags",
+    "related": "Related",
+    "observedSite": "Observed",
+    "tagsTitle": "Tags",
+    "tagsLede": "A small vocabulary; multi-select syncs to the URL.",
+    "tagLede": "Entries tagged “{tag}”.",
+    "allTags": "All tags",
+    "sitesTitle": "Observed sites",
+    "sitesLede": "Grouped by URL with counts.",
+    "sitesCount": "{n} sites",
+    "entryCount": "{n} entries",
+    "aboutTitle": "About",
+    "aboutLede": "About this project (placeholder).",
+    "aboutPlaceholder": "Why froQ collects these notes, how to contribute, contact — TBD.",
+    "feed": "RSS"
   },
   "notFound": {
-    "title": "",
-    "lede": "",
+    "title": "Not found",
+    "lede": "That number or link may not exist yet.",
     "back": "Back to home"
   }
 }

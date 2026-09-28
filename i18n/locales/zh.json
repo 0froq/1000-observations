@@ -1,17 +1,18 @@
 {
   "site": {
-    "title": "",
+    "title": "一千条个人站观察",
     "skip": "跳到正文",
-    "footer": ""
+    "footer": "froQ · 个人站观察笔记"
   },
   "theme": {
     "dark": "深色",
     "light": "浅色"
   },
   "nav": {
-    "docs": "文档",
-    "notes": "笔记",
-    "changelog": "更新日志",
+    "observations": "观察",
+    "tags": "标签",
+    "sites": "站点",
+    "about": "关于",
     "sections": "本页"
   },
   "install": {
@@ -21,33 +22,42 @@
     "copy": "复制",
     "copied": "已复制"
   },
-  "notes": {
-    "label": "笔记",
-    "title": "",
-    "lede": "",
-    "count": "共 {n} 篇",
+  "obs": {
+    "kicker": "个人站观察",
+    "indexTitle": "一千条观察",
+    "indexLede": "编号短笔记，记录在个人站上注意到的事。目前为占位骨架。",
+    "search": "搜索",
+    "searchPlaceholder": "搜标题、摘要或站点名…",
+    "sort": "排序",
+    "sortNumber": "按编号",
+    "sortNewest": "最新添加",
+    "filterTags": "按标签筛选",
+    "clearTags": "清除标签",
+    "empty": "没有匹配的观察。",
     "read": "阅读",
-    "minutes": "约 {n} 分钟",
-    "back": "全部笔记",
-    "next": "下一篇",
-    "end": ""
-  },
-  "changelog": {
-    "label": "更新日志",
-    "title": "",
-    "lede": "",
-    "count": "共 {n} 次发布",
-    "latest": "最新",
-    "end": ""
-  },
-  "docs": {
-    "label": "文档",
-    "prev": "上一篇",
-    "next": "下一篇"
+    "loadMore": "再加载 {n} 条",
+    "back": "全部观察",
+    "prev": "上一条",
+    "next": "下一条",
+    "tags": "标签",
+    "related": "相关观察",
+    "observedSite": "观察对象",
+    "tagsTitle": "标签",
+    "tagsLede": "小词表，多选筛选会同步到地址栏。",
+    "tagLede": "带「{tag}」标签的观察。",
+    "allTags": "全部标签",
+    "sitesTitle": "观察过的站点",
+    "sitesLede": "同一 URL 合并计数。",
+    "sitesCount": "共 {n} 个站点",
+    "entryCount": "{n} 条",
+    "aboutTitle": "关于",
+    "aboutLede": "项目说明占位。",
+    "aboutPlaceholder": "这里将来写 froQ 为何收集这些观察、如何投稿或联系。",
+    "feed": "RSS"
   },
   "notFound": {
-    "title": "",
-    "lede": "",
+    "title": "找不到这一页",
+    "lede": "编号或链接可能尚未写入。",
     "back": "回到首页"
   }
 }

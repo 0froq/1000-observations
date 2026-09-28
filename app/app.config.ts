@@ -2,8 +2,8 @@ import type { ProductConfig } from './types'
 
 export default defineAppConfig({
   product: {
-    name: '',
-    mark: '.',
+    name: '1000',
+    mark: '观',
     theme: {
       light: {
         bg: '#f4f2ec',
@@ -23,11 +23,12 @@ export default defineAppConfig({
       },
     },
     signature: { paper: true, line: true, hand: true, bloom: true, pointer: { dwell: 'wash', click: 'wash', dwellAfter: 1.2 } },
-    install: { href: null },
+    install: { href: '/about' },
     nav: [
-      { label: 'nav.docs', to: '/docs' },
-      { label: 'nav.notes', to: '/notes' },
-      { label: 'nav.changelog', to: '/changelog' },
+      { label: 'nav.observations', to: '/' },
+      { label: 'nav.tags', to: '/tags' },
+      { label: 'nav.sites', to: '/sites' },
+      { label: 'nav.about', to: '/about' },
     ],
   } satisfies ProductConfig,
 })
