@@ -1,16 +1,19 @@
+import process from 'node:process'
 import { keepEmptyTitle } from './shared/empty-title'
-import { markFinalStop } from './shared/final-mark'
 
 export default defineNuxtConfig({
   compatibilityDate: '2026-09-19',
 
+  runtimeConfig: {
+    public: {
+      siteUrl: process.env.NUXT_PUBLIC_SITE_URL || 'http://localhost:3000',
+    },
+  },
+
   hooks: {
-    // Notes and docs have no `::final`; the stop that ends the text blooms instead.
     // An explicit `title: ''` must stay empty: Content otherwise names the page after the file.
-    'content:file:afterParse': ({ file, content, collection }) => {
+    'content:file:afterParse': ({ file, content }) => {
       keepEmptyTitle(content, file.body)
-      if (collection.name === 'notes' || collection.name === 'docs')
-        markFinalStop(content.body)
     },
   },
 
@@ -66,7 +69,7 @@ export default defineNuxtConfig({
   nitro: {
     prerender: {
       crawlLinks: true,
-      routes: ['/', '/zh'],
+      routes: ['/', '/zh', '/feed.xml'],
     },
   },
 

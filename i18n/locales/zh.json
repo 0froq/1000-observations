@@ -1,17 +1,18 @@
 {
   "site": {
-    "title": "",
+    "title": "1000o.",
     "skip": "跳到正文",
-    "footer": ""
+    "footer": "froQ · 值得留下来的网站"
   },
   "theme": {
     "dark": "深色",
     "light": "浅色"
   },
   "nav": {
-    "docs": "文档",
-    "notes": "笔记",
-    "changelog": "更新日志",
+    "observations": "笔记",
+    "tags": "标签",
+    "sites": "站点",
+    "about": "关于",
     "sections": "本页"
   },
   "install": {
@@ -21,33 +22,42 @@
     "copy": "复制",
     "copied": "已复制"
   },
-  "notes": {
-    "label": "笔记",
-    "title": "",
-    "lede": "",
-    "count": "共 {n} 篇",
+  "obs": {
+    "kicker": "个人网站",
+    "indexTitle": "值得一看的网站。",
+    "indexLede": "给个人网站与设计的编号短记，记下值得欣赏的地方。目前是占位。",
+    "search": "搜索",
+    "searchPlaceholder": "标题、正文或站点名…",
+    "sort": "排序",
+    "sortNumber": "按编号",
+    "sortNewest": "最新",
+    "filterTags": "按标签筛选",
+    "clearTags": "清除标签",
+    "empty": "没有匹配的笔记。",
     "read": "阅读",
-    "minutes": "约 {n} 分钟",
+    "loadMore": "再加载 {n} 条",
     "back": "全部笔记",
-    "next": "下一篇",
-    "end": ""
-  },
-  "changelog": {
-    "label": "更新日志",
-    "title": "",
-    "lede": "",
-    "count": "共 {n} 次发布",
-    "latest": "最新",
-    "end": ""
-  },
-  "docs": {
-    "label": "文档",
-    "prev": "上一篇",
-    "next": "下一篇"
+    "prev": "上一条",
+    "next": "下一条",
+    "tags": "标签",
+    "related": "相近的笔记",
+    "observedSite": "网站",
+    "tagsTitle": "标签",
+    "tagsLede": "一小份词表，记下眼睛停住的地方。",
+    "tagLede": "关于{tag}的笔记。",
+    "allTags": "全部标签",
+    "sitesTitle": "这些网站",
+    "sitesLede": "按 URL 归在一起。",
+    "sitesCount": "共 {n} 个站点",
+    "entryCount": "{n} 条",
+    "aboutTitle": "关于",
+    "aboutLede": "一本笔记，不是记分牌。",
+    "aboutPlaceholder": "占位。1000o. 是 froQ 用来欣赏个人网站与设计的笔记本，最多一千条短记。",
+    "feed": "RSS"
   },
   "notFound": {
-    "title": "",
-    "lede": "",
-    "back": "回到首页"
+    "title": "找不到这一页",
+    "lede": "这个编号可能还没写。",
+    "back": "回到笔记"
   }
 }

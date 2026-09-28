@@ -1,17 +1,18 @@
 {
   "site": {
-    "title": "",
+    "title": "1000o.",
     "skip": "Skip to content",
-    "footer": ""
+    "footer": "froQ · notes on sites worth keeping"
   },
   "theme": {
     "dark": "Dark",
     "light": "Light"
   },
   "nav": {
-    "docs": "Docs",
-    "notes": "Notes",
-    "changelog": "Changelog",
+    "observations": "Notes",
+    "tags": "Tags",
+    "sites": "Sites",
+    "about": "About",
     "sections": "On this page"
   },
   "install": {
@@ -21,33 +22,42 @@
     "copy": "Copy",
     "copied": "Copied"
   },
-  "notes": {
-    "label": "Notes",
-    "title": "",
-    "lede": "",
-    "count": "{n} notes",
+  "obs": {
+    "kicker": "Personal sites",
+    "indexTitle": "Sites worth looking at.",
+    "indexLede": "Numbered notes on personal websites and the design that makes them feel considered. A notebook of things worth admiring. Placeholders for now.",
+    "search": "Search",
+    "searchPlaceholder": "Titles, notes, or site names…",
+    "sort": "Sort",
+    "sortNumber": "By number",
+    "sortNewest": "Newest",
+    "filterTags": "Filter by tag",
+    "clearTags": "Clear tags",
+    "empty": "Nothing matches.",
     "read": "Read",
-    "minutes": "{n} min read",
+    "loadMore": "Load {n} more",
     "back": "All notes",
-    "next": "Next note",
-    "end": ""
-  },
-  "changelog": {
-    "label": "Changelog",
-    "title": "",
-    "lede": "",
-    "count": "{n} releases",
-    "latest": "latest",
-    "end": ""
-  },
-  "docs": {
-    "label": "Docs",
     "prev": "Previous",
-    "next": "Next"
+    "next": "Next",
+    "tags": "Tags",
+    "related": "More in this vein",
+    "observedSite": "Site",
+    "tagsTitle": "Tags",
+    "tagsLede": "A small vocabulary for what caught the eye.",
+    "tagLede": "Notes that linger on {tag}.",
+    "allTags": "All tags",
+    "sitesTitle": "The sites",
+    "sitesLede": "Personal sites collected here, grouped by URL.",
+    "sitesCount": "{n} sites",
+    "entryCount": "{n} notes",
+    "aboutTitle": "About",
+    "aboutLede": "A notebook, not a scorecard.",
+    "aboutPlaceholder": "Placeholder. 1000o. is froQ’s notebook of personal websites and design worth admiring, up to a thousand short notes.",
+    "feed": "RSS"
   },
   "notFound": {
-    "title": "",
-    "lede": "",
-    "back": "Back to home"
+    "title": "Not found",
+    "lede": "That number may not be written yet.",
+    "back": "Back to the notes"
   }
 }
