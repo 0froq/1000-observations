@@ -28,6 +28,7 @@ useSeoMeta({ description: () => t('obs.indexLede') })
       title-name="obs.indexTitle"
       :lede="copy('obs.indexLede')"
       lede-name="obs.indexLede"
+      :hand="copy('obs.hand')"
     >
       <template #meta>
         <ObsProgress :count="count" />

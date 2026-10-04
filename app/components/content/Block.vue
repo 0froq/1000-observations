@@ -22,7 +22,7 @@ withDefaults(defineProps<{
   >
     <p
       class="l-label"
-      data-anchor="label"
+      :data-anchor="entry ? undefined : 'label'"
     >
       <Fill
         :value="label"

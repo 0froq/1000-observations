@@ -245,11 +245,29 @@ code {
   color: transparent;
 }
 
-.has-hand .l-tagline {
+.has-hand .l-hero .l-tagline {
   position: absolute;
   top: 24vh;
   right: var(--pad);
   font-size: calc(clamp(56px, 6.4vw, 104px) * var(--poster-scale));
+  color: transparent;
+  user-select: none;
+}
+
+/* The notebook head keeps its handwritten line in the open space above the title. */
+.l-page-head .l-tagline {
+  position: absolute;
+  top: 22vh;
+  right: var(--pad);
+  z-index: 1;
+  max-width: min(16ch, 46vw);
+  margin: 0;
+  font-size: calc(clamp(56px, 6.4vw, 104px) * var(--poster-scale));
+  line-height: 0.95;
+  text-align: right;
+}
+
+.has-hand .l-page-head .l-tagline {
   color: transparent;
   user-select: none;
 }
@@ -692,6 +710,10 @@ html:not(.has-hand) .l-release {
   letter-spacing: -0.04em;
 }
 
+.l-page-head:has(.l-tagline) .l-page-title {
+  max-width: 11ch;
+}
+
 .l-page-title.is-long {
   max-width: 14ch;
   margin-left: 0;
@@ -746,16 +768,21 @@ html:not(.has-hand) .l-release {
 }
 
 .l-section.is-entry {
-  padding-top: calc(var(--section-tight) * var(--section-scale));
+  grid-template-columns: max-content minmax(0, 1fr);
+  column-gap: clamp(14px, 2vw, 28px);
+  align-items: start;
+  padding-top: clamp(36px, 6vh, 64px);
 }
 
 .l-section.is-entry .l-body {
-  padding-top: 18px;
-  border-top: 1px solid var(--line);
+  grid-column: 2;
+  padding-top: 0;
+  border-top: 0;
 }
 
 .l-section.is-entry .l-label {
-  padding-top: 18px;
+  grid-column: 1;
+  padding-top: 0.55em;
 }
 
 .l-entry {
@@ -1029,6 +1056,15 @@ button.l-cta {
   .l-label,
   .l-amount {
     justify-self: start;
+  }
+
+  .l-section.is-entry {
+    grid-template-columns: 1fr;
+  }
+
+  .l-section.is-entry .l-label,
+  .l-section.is-entry .l-body {
+    grid-column: 1;
   }
 
   .l-section.is-entry .l-label {
