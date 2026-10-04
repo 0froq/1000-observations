@@ -2,6 +2,15 @@
   "$schema": "./node_modules/wrangler/config-schema.json",
   "name": "1000-observations",
   "compatibility_date": "2026-10-04",
-  "compatibility_flags": ["nodejs_compat"],
-  "pages_build_output_dir": "dist"
+  "observability": {
+    "enabled": true,
+    "traces": {
+      "enabled": true
+    }
+  },
+  "assets": {
+    "directory": "./dist",
+    "html_handling": "auto-trailing-slash",
+    "not_found_handling": "404-page"
+  }
 }

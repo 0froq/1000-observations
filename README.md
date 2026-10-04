@@ -119,7 +119,7 @@ Markdown 里的站内链接要写上语言前缀，比如中文文档里写 `/zh
 
 ## 命令
 
-推到 `main` 后，Cloudflare Pages（GitHub 连接，仓库不存放 API token）执行 `pnpm generate`，并按 `wrangler.jsonc` 发布 `dist`。
+推到 `main` 后，由 Workers Builds（GitHub 连接，仓库不存放 API token）构建并发布。网页里新建的是 Worker，不是 Pages。构建命令是 `pnpm generate`，部署命令是 `pnpm exec wrangler deploy`。静态文件在 `dist`，由 `wrangler.jsonc` 的 `assets.directory` 指定。
 
 ```bash
 pnpm dev        # 开发
