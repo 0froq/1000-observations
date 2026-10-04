@@ -3,7 +3,6 @@ import { OBSERVATION_TAG_LABELS, OBSERVATION_TAGS } from '#shared/observation-ta
 import { useSitesLoader } from '~/composables/useSites'
 
 const { t, locale } = useI18n()
-const copy = useCopy()
 const link = useKitLink()
 const { sites } = useSitesLoader()
 
@@ -18,44 +17,53 @@ const counts = computed(() => {
   return map
 })
 
-function tagLabel(tag: typeof OBSERVATION_TAGS[number]): string {
+const entries = computed(() => OBSERVATION_TAGS.map((tag) => {
   const labels = OBSERVATION_TAG_LABELS[tag]
-  return locale.value === 'zh' ? labels.zh : labels.en
-}
+  return {
+    tag,
+    label: locale.value === 'zh' ? labels.zh : labels.en,
+    count: counts.value.get(tag) ?? 0,
+  }
+}))
 
 useHead({ title: () => t('obs.tagsTitle') })
 </script>
 
 <template>
-  <Sheet line>
-    <PageHead
-      :kicker="copy('obs.kicker')"
-      kicker-name="obs.kicker"
-      :title="copy('obs.tagsTitle')"
-      title-name="obs.tagsTitle"
-      :lede="copy('obs.tagsLede')"
-      lede-name="obs.tagsLede"
-      compact
-    />
-    <div class="obs-tags-page">
-      <Block
-        v-for="tag in OBSERVATION_TAGS"
-        :key="tag"
-        :label="tag"
-        entry
-      >
-        <NuxtLink
-          class="l-entry"
-          :to="link(`/tags/${tag}`)"
+  <Sheet>
+    <div class="tag-spread">
+      <header class="tag-spread-head">
+        <p class="l-kicker">
+          {{ t('obs.tagsTitle') }}
+        </p>
+        <h1
+          class="tag-spread-lede"
+          :lang="locale === 'zh' ? 'zh' : 'en'"
         >
-          <h2 class="l-entry-title">
-            {{ tagLabel(tag) }}
-          </h2>
-          <p class="obs-entry-meta">
-            {{ t('obs.sitesCount', { n: counts.get(tag) ?? 0 }) }}
-          </p>
-        </NuxtLink>
-      </Block>
+          {{ t('obs.tagsLede') }}
+        </h1>
+      </header>
+      <ol class="tag-spread-list">
+        <li
+          v-for="entry in entries"
+          :key="entry.tag"
+        >
+          <NuxtLink
+            :to="link(`/tags/${entry.tag}`)"
+            :aria-label="`${entry.label} ${t('obs.sitesCount', { n: entry.count })}`"
+          >
+            <span class="tag-spread-word">{{ entry.label }}</span>
+            <span
+              class="tag-spread-rule"
+              aria-hidden="true"
+            />
+            <span
+              class="tag-spread-count"
+              :class="{ 'is-empty': entry.count === 0 }"
+            >{{ entry.count }}</span>
+          </NuxtLink>
+        </li>
+      </ol>
     </div>
   </Sheet>
 </template>
