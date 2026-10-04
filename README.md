@@ -119,11 +119,11 @@ Markdown 里的站内链接要写上语言前缀，比如中文文档里写 `/zh
 
 ## 命令
 
-推到 `main` 后，Cloudflare Pages（已连接 GitHub 仓库，不使用 API token secret）会执行 `pnpm generate` 并发布到 <https://paper-landing.pages.dev>。
+推到 `main` 后，Cloudflare Pages（GitHub 连接，仓库不存放 API token）执行 `pnpm generate`，并按 `wrangler.jsonc` 发布 `dist`。
 
 ```bash
 pnpm dev        # 开发
-pnpm generate   # 静态站点，输出到 .output/public
+pnpm generate   # 静态站点，输出到 dist
 pnpm build      # 带服务端的构建
 pnpm lint
 pnpm typecheck
