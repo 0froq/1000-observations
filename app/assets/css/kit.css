@@ -1525,7 +1525,7 @@ button.l-cta {
 
 .tag-spread-list a {
   display: grid;
-  grid-template-columns: max-content minmax(1.25rem, 1fr) 2.5ch;
+  grid-template-columns: max-content minmax(1.25rem, 1fr) 3ch;
   gap: 0 0.7em;
   align-items: baseline;
   padding: 0.12em 0 0.02em;
