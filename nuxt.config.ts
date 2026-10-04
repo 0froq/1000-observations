@@ -17,6 +17,8 @@ export default defineNuxtConfig({
     },
   },
 
+  build: { transpile: ['@froq/ui'] },
+
   modules: [
     '@nuxt/content',
     '@nuxtjs/i18n',
