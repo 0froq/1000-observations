@@ -3,10 +3,12 @@ import { formatObservationId } from '#shared/observations'
 export default defineEventHandler(async (event) => {
   const config = useRuntimeConfig()
   const siteUrl = config.public.siteUrl || 'http://localhost:3000'
-  const items = await queryCollection(event, 'observations')
+  const items = (await queryCollection(event, 'documents')
+    .where('number', '>', 0)
     .order('date', 'DESC')
     .select('number', 'title', 'description', 'date')
-    .all()
+    .all())
+    .filter((item): item is typeof item & { number: number, date: string } => item.number != null && item.date != null)
 
   const escape = (s: string) => s
     .replace(/&/g, '&amp;')
@@ -15,7 +17,7 @@ export default defineEventHandler(async (event) => {
 
   const entries = items.map((item) => {
     const id = formatObservationId(item.number)
-    const link = `${siteUrl}/o/${id}`
+    const link = `${siteUrl}/s/${id}`
     const desc = escape(item.description ?? '')
     return `
     <item>
@@ -32,7 +34,7 @@ export default defineEventHandler(async (event) => {
   <channel>
     <title>1000o.</title>
     <link>${siteUrl}</link>
-    <description>Short notes on personal websites and design worth admiring.</description>
+    <description>A thousand personal sites, each a folder of notes.</description>
     ${entries}
   </channel>
 </rss>`

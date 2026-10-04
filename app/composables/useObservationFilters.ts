@@ -1,5 +1,5 @@
 import type { ObservationTag } from '#shared/observation-tags'
-import type { ObservationSort } from './useObservations'
+import type { SiteSort } from './useSites'
 import { isObservationTag } from '#shared/observation-tags'
 
 function parseTags(raw: unknown): ObservationTag[] {
@@ -8,7 +8,7 @@ function parseTags(raw: unknown): ObservationTag[] {
   return raw.split(',').map(s => s.trim()).filter(isObservationTag)
 }
 
-function parseSort(raw: unknown): ObservationSort {
+function parseSort(raw: unknown): SiteSort {
   return raw === 'newest' ? 'newest' : 'number'
 }
 
@@ -50,7 +50,7 @@ export function useObservationFilters() {
     pushQuery({ tags: undefined })
   }
 
-  function setSort(value: ObservationSort) {
+  function setSort(value: SiteSort) {
     pushQuery({ sort: value === 'number' ? undefined : value })
   }
 

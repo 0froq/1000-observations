@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { ObservationSort } from '~/composables/useObservations'
+import type { SiteSort } from '~/composables/useSites'
 import { OBSERVATION_TAG_LABELS, OBSERVATION_TAGS } from '#shared/observation-tags'
 
 const { locale, t } = useI18n()
@@ -22,7 +22,7 @@ function tagLabel(tag: typeof OBSERVATION_TAGS[number]): string {
 }
 
 function onSortChange(event: Event) {
-  const value = (event.target as HTMLSelectElement).value as ObservationSort
+  const value = (event.target as HTMLSelectElement).value as SiteSort
   setSort(value)
 }
 </script>

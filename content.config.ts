@@ -3,19 +3,24 @@ import { OBSERVATION_TAGS } from './shared/observation-tags'
 
 const tagSchema = z.enum(OBSERVATION_TAGS)
 
-/** One file per observation (`content/observations/0042.md`) — scales cleanly to 1000. */
+/**
+ * One directory per site (`content/sites/0042/`).
+ * `index.md` is the site. Every other markdown file is a note in that folder.
+ * `nav` is a sidebar group label, not a page. `order` sorts items inside a group.
+ */
 export default defineContentConfig({
   collections: {
-    observations: defineCollection({
+    documents: defineCollection({
       type: 'page',
-      source: 'observations/*.md',
+      source: 'sites/**/*.md',
       schema: z.object({
-        number: z.number().int().min(1).max(1000),
-        date: z.string(),
+        number: z.number().int().min(1).max(1000).optional(),
+        date: z.string().optional(),
         tags: z.array(tagSchema).default([]),
-        siteName: z.string().optional(),
-        siteUrl: z.string().url().optional(),
-        screenshot: z.string().optional(),
+        url: z.string().url().optional(),
+        label: z.string().optional(),
+        nav: z.string().optional(),
+        order: z.number().default(0),
       }),
     }),
   },

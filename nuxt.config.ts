@@ -31,6 +31,7 @@ export default defineNuxtConfig({
     '@fontsource/instrument-serif/400.css',
     '@fontsource/instrument-serif/400-italic.css',
     '~/assets/css/kit.css',
+    '@froq/ui/style.css',
   ],
 
   app: {

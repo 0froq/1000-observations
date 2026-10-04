@@ -2,14 +2,14 @@
   "site": {
     "title": "1000o.",
     "skip": "跳到正文",
-    "footer": "froQ · 值得留下来的网站"
+    "footer": "froQ · 值得留下来的一千个站"
   },
   "theme": {
     "dark": "深色",
     "light": "浅色"
   },
   "nav": {
-    "observations": "笔记",
+    "observations": "站点",
     "tags": "标签",
     "sites": "站点",
     "about": "关于",
@@ -26,18 +26,19 @@
     "kicker": "个人网站",
     "hand": "look closer.",
     "indexTitle": "值得一看的网站。",
-    "indexLede": "给个人网站与设计的编号短记，记下值得欣赏的地方。目前是占位。",
+    "indexLede": "一千个站。每个站是一个笔记目录，侧栏就是这个目录。目前是占位。",
     "search": "搜索",
-    "searchPlaceholder": "标题、正文或站点名…",
+    "searchPlaceholder": "站点名或笔记…",
     "sort": "排序",
     "sortNumber": "按编号",
     "sortNewest": "最新",
     "filterTags": "按标签筛选",
     "clearTags": "清除标签",
-    "empty": "没有匹配的笔记。",
-    "read": "阅读",
+    "empty": "没有匹配的站点。",
+    "read": "打开",
+    "docCount": "{n} 篇",
     "loadMore": "再加载 {n} 条",
-    "back": "全部笔记",
+    "back": "全部站点",
     "prev": "上一条",
     "next": "下一条",
     "tags": "标签",
@@ -45,20 +46,20 @@
     "observedSite": "网站",
     "tagsTitle": "标签",
     "tagsLede": "一小份词表，记下眼睛停住的地方。",
-    "tagLede": "关于{tag}的笔记。",
+    "tagLede": "关于{tag}的站点。",
     "allTags": "全部标签",
     "sitesTitle": "这些网站",
     "sitesLede": "按 URL 归在一起。",
     "sitesCount": "共 {n} 个站点",
     "entryCount": "{n} 条",
     "aboutTitle": "关于",
-    "aboutLede": "一本笔记，不是记分牌。",
-    "aboutPlaceholder": "占位。1000o. 是 froQ 用来欣赏个人网站与设计的笔记本，最多一千条短记。",
+    "aboutLede": "一千个站，每个站是一个目录。",
+    "aboutPlaceholder": "占位。1000o. 记下值得一看的个人网站，最多一千个。一个站是一个笔记目录，不是单独的一条。",
     "feed": "RSS"
   },
   "notFound": {
     "title": "找不到这一页",
-    "lede": "这个编号可能还没写。",
-    "back": "回到笔记"
+    "lede": "这个站可能还没写。",
+    "back": "回到站点"
   }
 }

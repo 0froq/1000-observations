@@ -2,14 +2,14 @@
   "site": {
     "title": "1000o.",
     "skip": "Skip to content",
-    "footer": "froQ · notes on sites worth keeping"
+    "footer": "froQ · a thousand sites worth keeping"
   },
   "theme": {
     "dark": "Dark",
     "light": "Light"
   },
   "nav": {
-    "observations": "Notes",
+    "observations": "Sites",
     "tags": "Tags",
     "sites": "Sites",
     "about": "About",
@@ -26,18 +26,19 @@
     "kicker": "Personal sites",
     "hand": "look closer.",
     "indexTitle": "Sites worth looking at.",
-    "indexLede": "Numbered notes on personal websites and the design that makes them feel considered. A notebook of things worth admiring. Placeholders for now.",
+    "indexLede": "A thousand sites. Each one is a folder of notes, and the sidebar is that folder. Placeholders for now.",
     "search": "Search",
-    "searchPlaceholder": "Titles, notes, or site names…",
+    "searchPlaceholder": "Site names or notes…",
     "sort": "Sort",
     "sortNumber": "By number",
     "sortNewest": "Newest",
     "filterTags": "Filter by tag",
     "clearTags": "Clear tags",
-    "empty": "Nothing matches.",
-    "read": "Read",
+    "empty": "No sites match.",
+    "read": "Open",
+    "docCount": "{n} notes",
     "loadMore": "Load {n} more",
-    "back": "All notes",
+    "back": "All sites",
     "prev": "Previous",
     "next": "Next",
     "tags": "Tags",
@@ -45,20 +46,20 @@
     "observedSite": "Site",
     "tagsTitle": "Tags",
     "tagsLede": "A small vocabulary for what caught the eye.",
-    "tagLede": "Notes that linger on {tag}.",
+    "tagLede": "Sites that linger on {tag}.",
     "allTags": "All tags",
     "sitesTitle": "The sites",
     "sitesLede": "Personal sites collected here, grouped by URL.",
     "sitesCount": "{n} sites",
     "entryCount": "{n} notes",
     "aboutTitle": "About",
-    "aboutLede": "A notebook, not a scorecard.",
-    "aboutPlaceholder": "Placeholder. 1000o. is froQ’s notebook of personal websites and design worth admiring, up to a thousand short notes.",
+    "aboutLede": "A thousand sites, each a folder of notes.",
+    "aboutPlaceholder": "Placeholder. 1000o. keeps personal sites worth looking at, up to a thousand. A site is a directory of notes, not a single card.",
     "feed": "RSS"
   },
   "notFound": {
     "title": "Not found",
-    "lede": "That number may not be written yet.",
-    "back": "Back to the notes"
+    "lede": "That site may not be written yet.",
+    "back": "Back to the sites"
   }
 }

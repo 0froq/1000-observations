@@ -4,7 +4,7 @@
   "version": "0.1.0",
   "private": true,
   "packageManager": "pnpm@10.15.0",
-  "description": "1000o. — numbered notes on personal websites and design worth admiring.",
+  "description": "1000o. — a thousand personal sites, each a folder of notes.",
   "scripts": {
     "dev": "nuxt dev",
     "build": "nuxt build",

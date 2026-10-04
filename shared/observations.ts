@@ -14,9 +14,10 @@ export function parseObservationId(id: string): number | null {
   return n
 }
 
-export function observationPath(id: string | number): string {
+/** A site directory: `/s/0001`. */
+export function sitePath(id: string | number): string {
   const num = typeof id === 'number' ? id : parseObservationId(id)
   if (num == null)
     return '/'
-  return `/o/${formatObservationId(num)}`
+  return `/s/${formatObservationId(num)}`
 }

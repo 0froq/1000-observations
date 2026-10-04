@@ -1,17 +1,17 @@
 <script setup lang="ts">
 import { OBSERVATION_TAG_LABELS, OBSERVATION_TAGS } from '#shared/observation-tags'
-import { useObservationsLoader } from '~/composables/useObservations'
+import { useSitesLoader } from '~/composables/useSites'
 
 const { t, locale } = useI18n()
 const copy = useCopy()
 const link = useKitLink()
-const { observations } = useObservationsLoader()
+const { sites } = useSitesLoader()
 
 const counts = computed(() => {
   const map = new Map<string, number>()
   for (const tag of OBSERVATION_TAGS)
     map.set(tag, 0)
-  for (const obs of observations.value ?? []) {
+  for (const obs of sites.value ?? []) {
     for (const tag of obs.tags ?? [])
       map.set(tag, (map.get(tag) ?? 0) + 1)
   }

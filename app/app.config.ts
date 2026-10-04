@@ -27,7 +27,6 @@ export default defineAppConfig({
     nav: [
       { label: 'nav.observations', to: '/' },
       { label: 'nav.tags', to: '/tags' },
-      { label: 'nav.sites', to: '/sites' },
       { label: 'nav.about', to: '/about' },
     ],
   } satisfies ProductConfig,

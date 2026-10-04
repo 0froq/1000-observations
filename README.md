@@ -1,6 +1,6 @@
 # 1000o.
 
-froQ 的笔记本：给值得欣赏的个人网站和设计写短记，最多一千条。现在是骨架，大约 30 条，每条都标着 Placeholder。列表按一千条来做（继续加载、标签、搜索，以及 N / 1000）。
+froQ 的笔记本：一千个值得一看的个人网站。每个站是一个文档目录，里面可以有多篇笔记，打开后用侧栏在目录里走。现在是骨架，大约 30 个站，内容都标着 Placeholder。列表按一千个站来做（继续加载、标签、搜索，以及 N / 1000）。
 
 纸面是 [paper-landing](https://github.com/0froq/paper-landing) 的纤维和颗粒。鼠标停住或点下去不会留下墨点，墨线也不会被拽弯。默认英文（`/`），中文在 `/zh`。
 
@@ -15,39 +15,45 @@ RSS：`/feed.xml`。
 
 ## 内容
 
-一条笔记一个 Markdown 文件：
+一个站一个目录，目录里每篇笔记一个 Markdown 文件。`index.md` 是这个站。`nav` 是侧栏分组名，分组本身不是页面。子目录里的文件挂在该目录的 `index.md` 下面。
 
 ```
-content/observations/0042.md
+content/sites/0042/index.md
+content/sites/0042/homepage.md
+content/sites/0042/type/scale.md
 ```
+
+`index.md`：
 
 | 字段 | |
 | --- | --- |
-| `number` | 1–1000，和文件名一致 |
-| `title` | 一行 |
+| `number` | 1–1000，和目录名一致 |
+| `title` | 站名 |
 | `description` | 列表里的摘要 |
 | `date` | `YYYY-MM-DD` |
 | `tags` | 见 `shared/observation-tags.ts` |
-| `siteName` / `siteUrl` | 被记下的网站，可空 |
-| `screenshot` | `public/` 下的路径，可空，页面上还没画 |
+| `url` | 这个站本身，可空 |
+| `label` | 侧栏上的短名，可空，空了用 `title` |
+| `nav` | 侧栏分组 |
+| `order` | 分组里的顺序 |
 
-下一条编号：
+下一站编号：
 
 ```bash
 node scripts/next-observation-number.mjs
 ```
 
-路径是 `/o/0042`。
+路径是 `/s/0042`，某一篇是 `/s/0042/homepage`。
 
 ## 路由
 
 | 路径 | |
 | --- | --- |
-| `/` | 首页：N / 1000、筛选、搜索、继续加载 |
-| `/o/:id` | 一条笔记，上一条 / 下一条，同标签 |
+| `/` | 首页：N / 1000 个站、筛选、搜索、继续加载 |
+| `/s/:id` | 一个站的目录，侧栏列出里面的笔记 |
+| `/s/:id/...` | 这个目录里的一篇 |
 | `/tags` | 标签 |
-| `/tags/:tag` | 某个标签下的笔记 |
-| `/sites` | 按网站归在一起 |
+| `/tags/:tag` | 某个标签下的站 |
 | `/about` | 关于 |
 
 ## 发布

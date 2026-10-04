@@ -1,18 +1,18 @@
 <script setup lang="ts">
-import type { ObservationListItem } from '~/composables/useObservations'
-import { filterObservations, sortObservations, useObservationsLoader } from '~/composables/useObservations'
+import type { SiteListItem } from '~/composables/useSites'
+import { filterSites, sortSites, useSitesLoader } from '~/composables/useSites'
 
 const { t } = useI18n()
 const copy = useCopy()
-const { observations } = useObservationsLoader()
+const { sites } = useSitesLoader()
 const { q, tags, sort } = useObservationFilters()
 
 const filtered = computed(() => {
-  const list = (observations.value ?? []) as ObservationListItem[]
-  return sortObservations(filterObservations(list, { q: q.value, tags: tags.value }), sort.value)
+  const list = (sites.value ?? []) as SiteListItem[]
+  return sortSites(filterSites(list, { q: q.value, tags: tags.value }), sort.value)
 })
 
-const count = computed(() => (observations.value ?? []).length)
+const count = computed(() => (sites.value ?? []).length)
 
 useHead({ title: () => t('obs.indexTitle') })
 useSeoMeta({ description: () => t('obs.indexLede') })

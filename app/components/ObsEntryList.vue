@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import type { ObservationListItem } from '~/composables/useObservations'
+import type { SiteListItem } from '~/composables/useSites'
 import { OBSERVATION_TAG_LABELS } from '#shared/observation-tags'
-import { formatObservationId, OBSERVATION_PAGE_SIZE, observationPath } from '#shared/observations'
+import { formatObservationId, OBSERVATION_PAGE_SIZE, sitePath } from '#shared/observations'
 
 const props = defineProps<{
-  items: ObservationListItem[]
+  items: SiteListItem[]
 }>()
 
 const { t, locale } = useI18n()
@@ -22,7 +22,7 @@ function loadMore() {
   visible.value = Math.min(props.items.length, visible.value + OBSERVATION_PAGE_SIZE)
 }
 
-function tagLabel(tag: ObservationListItem['tags'][number]): string {
+function tagLabel(tag: SiteListItem['tags'][number]): string {
   const labels = OBSERVATION_TAG_LABELS[tag]
   return locale.value === 'zh' ? labels.zh : labels.en
 }
@@ -45,7 +45,7 @@ function tagLabel(tag: ObservationListItem['tags'][number]): string {
     >
       <NuxtLink
         class="l-entry"
-        :to="link(observationPath(item.number))"
+        :to="link(sitePath(item.number))"
       >
         <h2 class="l-entry-title">
           {{ item.title }}
@@ -58,10 +58,7 @@ function tagLabel(tag: ObservationListItem['tags'][number]): string {
         </p>
         <p class="obs-entry-meta">
           <span>{{ item.date }}</span>
-          <span
-            v-if="item.siteName"
-            class="obs-site-hint"
-          >{{ item.siteName }}</span>
+          <span>{{ t('obs.docCount', { n: item.docs }) }}</span>
         </p>
         <ul
           v-if="item.tags.length"

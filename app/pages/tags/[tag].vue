@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import type { ObservationTag } from '#shared/observation-tags'
-import type { ObservationListItem } from '~/composables/useObservations'
+import type { SiteListItem } from '~/composables/useSites'
 import { isObservationTag, OBSERVATION_TAG_LABELS } from '#shared/observation-tags'
-import { filterObservations, sortObservations, useObservationsLoader } from '~/composables/useObservations'
+import { filterSites, sortSites, useSitesLoader } from '~/composables/useSites'
 
 const route = useRoute()
 const { t, locale } = useI18n()
@@ -13,16 +13,16 @@ const tagParam = computed(() => String(route.params.tag))
 if (!isObservationTag(tagParam.value))
   throw createError({ statusCode: 404, statusMessage: 'Not found', fatal: true })
 
-const { observations } = useObservationsLoader()
+const { sites } = useSitesLoader()
 const { q, tags, sort } = useObservationFilters()
 
 const routeTag = computed(() => tagParam.value as ObservationTag)
 
 const filtered = computed(() => {
-  const list = (observations.value ?? []) as ObservationListItem[]
-  const extra = tags.value.filter(t => t !== routeTag.value)
-  const withTag = filterObservations(list, { q: q.value, tags: [routeTag.value, ...extra] })
-  return sortObservations(withTag, sort.value)
+  const list = (sites.value ?? []) as SiteListItem[]
+  const extra = tags.value.filter(tag => tag !== routeTag.value)
+  const withTag = filterSites(list, { q: q.value, tags: [routeTag.value, ...extra] })
+  return sortSites(withTag, sort.value)
 })
 
 const tagLabel = computed(() => {
