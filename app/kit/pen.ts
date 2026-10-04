@@ -81,13 +81,9 @@ export function createPen(options: PenOptions): PenLayer {
   let X = new Float32Array()
   let Y = new Float32Array()
   let Wd = new Float32Array()
-  let NX = new Float32Array()
-  let NY = new Float32Array()
   let stainAt = new Float64Array()
   let OX = new Float32Array()
   let OY = new Float32Array()
-  let VX = new Float32Array()
-  let VY = new Float32Array()
   let segs: Seg[] = []
   let total = 0
   let head = 0
@@ -275,21 +271,12 @@ export function createPen(options: PenOptions): PenLayer {
     Wd = new Float32Array(total)
     OX = new Float32Array(total)
     OY = new Float32Array(total)
-    VX = new Float32Array(total)
-    VY = new Float32Array(total)
-    NX = new Float32Array(total)
-    NY = new Float32Array(total)
     stainAt = new Float64Array(total)
     wake = Number.POSITIVE_INFINITY
     pts.forEach(([x, y], i) => {
       X[i] = x
       Y[i] = y
       Wd[i] = widths[i] ?? 0
-      const a = pts[Math.max(0, i - 3)]!
-      const b = pts[Math.min(total - 1, i + 3)]!
-      const l = Math.hypot(b[0] - a[0], b[1] - a[1]) || 1
-      NX[i] = -(b[1] - a[1]) / l
-      NY[i] = (b[0] - a[0]) / l
     })
   }
 
@@ -313,14 +300,6 @@ export function createPen(options: PenOptions): PenLayer {
     head = finished ? total - 1 : (segIndex > 0 && prev ? prev.to : 0)
     dirty = true
   }
-
-  let pointer: { x: number, y: number } | null = null
-  window.addEventListener('pointermove', (event) => {
-    pointer = { x: event.clientX, y: event.clientY + window.scrollY }
-  }, { passive: true, signal })
-  document.addEventListener('mouseleave', () => {
-    pointer = null
-  }, { signal })
 
   let lastScroll = -1
   let last = performance.now()
@@ -374,44 +353,7 @@ export function createPen(options: PenOptions): PenLayer {
   }
 
   function thread(): boolean {
-    if (reduced)
-      return false
-    const y0 = window.scrollY - 60
-    const y1 = window.scrollY + H + 60
-    const R = 70
-    let active = false
-    const upto = Math.floor(head)
-    for (let i = 0; i <= upto; i++) {
-      const y = Y[i] ?? 0
-      if (y < y0 || y > y1) {
-        if ((OX[i] ?? 0) !== 0 || (OY[i] ?? 0) !== 0)
-          OX[i] = OY[i] = VX[i] = VY[i] = 0
-        continue
-      }
-      let tx = 0
-      let ty = 0
-      if (pointer) {
-        const dx = (X[i] ?? 0) - pointer.x
-        const dy = y - pointer.y
-        const d = Math.hypot(dx, dy)
-        if (d < R) {
-          // Pushed along the line's normal, away from the pointer's side, like a plucked string
-          const nx = NX[i] ?? 0
-          const ny = NY[i] ?? 0
-          const side = dx * nx + dy * ny < 0 ? -1 : 1
-          const f = (1 - d / R) ** 2 * 16 * side
-          tx = nx * f
-          ty = ny * f
-        }
-      }
-      VX[i] = ((VX[i] ?? 0) + (tx - (OX[i] ?? 0)) * 0.14) * 0.8
-      VY[i] = ((VY[i] ?? 0) + (ty - (OY[i] ?? 0)) * 0.14) * 0.8
-      OX[i] = (OX[i] ?? 0) + (VX[i] ?? 0)
-      OY[i] = (OY[i] ?? 0) + (VY[i] ?? 0)
-      if (Math.abs(OX[i] ?? 0) + Math.abs(OY[i] ?? 0) + Math.abs(VX[i] ?? 0) + Math.abs(VY[i] ?? 0) > 0.02)
-        active = true
-    }
-    return active
+    return false
   }
 
   function draw(now: number): boolean {

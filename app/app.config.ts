@@ -2,7 +2,7 @@ import type { ProductConfig } from './types'
 
 export default defineAppConfig({
   product: {
-    name: '',
+    name: '1000o',
     mark: '.',
     theme: {
       light: {
@@ -22,12 +22,13 @@ export default defineAppConfig({
         accent: '#ff6242',
       },
     },
-    signature: { paper: true, line: true, hand: true, bloom: true, pointer: { dwell: 'wash', click: 'wash', dwellAfter: 1.2 } },
-    install: { href: null },
+    signature: { paper: false, line: true, hand: true, bloom: false, pointer: { dwell: false, click: false, dwellAfter: 1.2 } },
+    install: { href: '/about' },
     nav: [
-      { label: 'nav.docs', to: '/docs' },
-      { label: 'nav.notes', to: '/notes' },
-      { label: 'nav.changelog', to: '/changelog' },
+      { label: 'nav.observations', to: '/' },
+      { label: 'nav.tags', to: '/tags' },
+      { label: 'nav.sites', to: '/sites' },
+      { label: 'nav.about', to: '/about' },
     ],
   } satisfies ProductConfig,
 })
