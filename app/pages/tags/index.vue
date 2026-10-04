@@ -37,16 +37,25 @@ useHead({ title: () => t('obs.tagsTitle') })
       lede-name="obs.tagsLede"
       compact
     />
-    <ul class="obs-tag-index l-body">
-      <li
+    <div class="obs-tags-page">
+      <Block
         v-for="tag in OBSERVATION_TAGS"
         :key="tag"
+        :label="tag"
+        entry
       >
-        <NuxtLink :to="link(`/tags/${tag}`)">
-          <span class="obs-tag-index-label">{{ tagLabel(tag) }}</span>
-          <span class="obs-tag-index-count">{{ counts.get(tag) ?? 0 }}</span>
+        <NuxtLink
+          class="l-entry"
+          :to="link(`/tags/${tag}`)"
+        >
+          <h2 class="l-entry-title">
+            {{ tagLabel(tag) }}
+          </h2>
+          <p class="obs-entry-meta">
+            {{ t('obs.sitesCount', { n: counts.get(tag) ?? 0 }) }}
+          </p>
         </NuxtLink>
-      </li>
-    </ul>
+      </Block>
+    </div>
   </Sheet>
 </template>

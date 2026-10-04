@@ -6,19 +6,25 @@ useHead({ title: () => t('obs.aboutTitle') })
 </script>
 
 <template>
-  <Sheet line>
+  <Sheet
+    line
+    class="about-page"
+  >
     <PageHead
+      class="is-fit"
+      long
       :kicker="copy('obs.kicker')"
       kicker-name="obs.kicker"
       :title="copy('obs.aboutTitle')"
       title-name="obs.aboutTitle"
       :lede="copy('obs.aboutLede')"
       lede-name="obs.aboutLede"
-      compact
     />
-    <section class="l-section is-prose">
+    <section class="l-section is-prose about-copy">
       <div class="l-body l-prose">
-        <p>{{ t('obs.aboutPlaceholder') }}</p>
+        <p>{{ t('obs.aboutP1') }}</p>
+        <p>{{ t('obs.aboutP2') }}</p>
+        <p>{{ t('obs.aboutP3') }}</p>
       </div>
     </section>
   </Sheet>

@@ -54,7 +54,9 @@
     "entryCount": "{n} notes",
     "aboutTitle": "About",
     "aboutLede": "A thousand sites, each a folder of notes.",
-    "aboutPlaceholder": "Placeholder. 1000o. keeps personal sites worth looking at, up to a thousand. A site is a directory of notes, not a single card.",
+    "aboutP1": "1000o. is froQ’s notebook of personal sites. The thousand is a thousand sites, not a thousand notes.",
+    "aboutP2": "Each site is a folder. The notes in it are the things worth a second look: a homepage, a margin, a line of type. The sidebar is that folder.",
+    "aboutP3": "What is here now is still a placeholder. The paper and the count are already in place. The sites get written in one at a time.",
     "feed": "RSS"
   },
   "notFound": {
