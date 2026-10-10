@@ -18,7 +18,11 @@ const slug = computed(() => {
   const raw = route.params.slug
   if (!raw)
     return ''
-  return (Array.isArray(raw) ? raw : [raw]).join('/')
+  // A trailing slash arrives as an empty segment. It is not part of the document path.
+  return (Array.isArray(raw) ? raw : [raw])
+    .flatMap(segment => segment.split('/'))
+    .filter(segment => segment.length > 0)
+    .join('/')
 })
 const contentPath = computed(() => slug.value ? `/sites/${id.value}/${slug.value}` : `/sites/${id.value}`)
 

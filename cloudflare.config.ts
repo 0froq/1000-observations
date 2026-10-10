@@ -11,7 +11,9 @@ export default defineConfig({
       },
     },
     assets: {
-      htmlHandling: 'auto-trailing-slash',
+      // Nuxt routes have no trailing slash. auto-trailing-slash redirects
+      // `/s/0001/homepage` to `/s/0001/homepage/`, and that empty segment 404s.
+      htmlHandling: 'drop-trailing-slash',
       notFoundHandling: '404-page',
     },
   },
