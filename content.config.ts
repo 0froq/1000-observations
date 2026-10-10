@@ -1,42 +1,27 @@
 import { defineCollection, defineContentConfig, z } from '@nuxt/content'
+import { OBSERVATION_TAGS } from './shared/observation-tags'
 
-// Every file lives under a locale folder (`en/`, `zh/`), so paths start with `/en`, `/zh`.
+const tagSchema = z.enum(OBSERVATION_TAGS)
+
+/**
+ * One directory per site (`content/sites/0042/`).
+ * `index.md` is the site. Every other markdown file is a note in that folder.
+ * `nav` is a sidebar group label, not a page. `order` sorts items inside a group.
+ */
 export default defineContentConfig({
   collections: {
-    // Free-form pages built from MDC blocks: the landing (`index.md`), install, anything else
-    pages: defineCollection({
+    documents: defineCollection({
       type: 'page',
-      source: {
-        include: '*/**/*.md',
-        exclude: ['*/notes/**', '*/changelog/**', '*/docs/**'],
-      },
+      source: 'sites/**/*.md',
       schema: z.object({
-        kicker: z.string().optional(),
-        // Page head with a big title and ruled lede; the landing turns it off and uses `::hero`
-        head: z.boolean().default(true),
-        // Whether the pen runs through this page
-        line: z.boolean().default(true),
+        number: z.number().int().min(1).max(1000).optional(),
+        date: z.string().optional(),
+        tags: z.array(tagSchema).default([]),
+        url: z.string().url().optional(),
+        label: z.string().optional(),
+        nav: z.string().optional(),
+        order: z.number().default(0),
       }),
-    }),
-    notes: defineCollection({
-      type: 'page',
-      source: '*/notes/*.md',
-      schema: z.object({
-        date: z.string(),
-      }),
-    }),
-    changelog: defineCollection({
-      type: 'page',
-      source: '*/changelog/*.md',
-      schema: z.object({
-        version: z.string(),
-        date: z.string(),
-      }),
-    }),
-    // Numeric prefixes (`1.install.md`) order the sidebar and are dropped from the path
-    docs: defineCollection({
-      type: 'page',
-      source: '*/docs/**/*.md',
     }),
   },
 })

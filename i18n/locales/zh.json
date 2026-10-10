@@ -1,17 +1,18 @@
 {
   "site": {
-    "title": "",
+    "title": "1000o.",
     "skip": "跳到正文",
-    "footer": ""
+    "footer": "froQ · 值得留下来的一千个站"
   },
   "theme": {
     "dark": "深色",
     "light": "浅色"
   },
   "nav": {
-    "docs": "文档",
-    "notes": "笔记",
-    "changelog": "更新日志",
+    "observations": "站点",
+    "tags": "标签",
+    "sites": "站点",
+    "about": "关于",
     "sections": "本页"
   },
   "install": {
@@ -21,33 +22,46 @@
     "copy": "复制",
     "copied": "已复制"
   },
-  "notes": {
-    "label": "笔记",
-    "title": "",
-    "lede": "",
-    "count": "共 {n} 篇",
-    "read": "阅读",
-    "minutes": "约 {n} 分钟",
-    "back": "全部笔记",
-    "next": "下一篇",
-    "end": ""
-  },
-  "changelog": {
-    "label": "更新日志",
-    "title": "",
-    "lede": "",
-    "count": "共 {n} 次发布",
-    "latest": "最新",
-    "end": ""
-  },
-  "docs": {
-    "label": "文档",
-    "prev": "上一篇",
-    "next": "下一篇"
+  "obs": {
+    "kicker": "个人网站",
+    "hand": "look closer.",
+    "indexTitle": "值得一看的网站。",
+    "indexLede": "一千个站。每个站是一个笔记目录，侧栏就是这个目录。目前是占位。",
+    "search": "搜索",
+    "searchPlaceholder": "站点名或笔记…",
+    "sort": "排序",
+    "sortNumber": "按编号",
+    "sortNewest": "最新",
+    "filterTags": "按标签筛选",
+    "clearTags": "清除标签",
+    "empty": "没有匹配的站点。",
+    "read": "打开",
+    "docCount": "{n} 篇",
+    "loadMore": "再加载 {n} 条",
+    "back": "全部站点",
+    "prev": "上一条",
+    "next": "下一条",
+    "tags": "标签",
+    "related": "相近的笔记",
+    "observedSite": "网站",
+    "tagsTitle": "标签",
+    "tagsLede": "一小份词表，记下眼睛停住的地方。",
+    "tagLede": "关于{tag}的站点。",
+    "allTags": "全部标签",
+    "sitesTitle": "这些网站",
+    "sitesLede": "按 URL 归在一起。",
+    "sitesCount": "共 {n} 个站点",
+    "entryCount": "{n} 条",
+    "aboutTitle": "关于",
+    "aboutLede": "一千个站，每个站是一个目录。",
+    "aboutP1": "1000o. 是 froQ 的笔记本，记值得一看的个人网站。这一千是一千个站，不是一千条笔记。",
+    "aboutP2": "每个站是一个目录。里面的笔记是再看一眼的地方：首页、页边、一行字。侧栏就是这个目录。",
+    "aboutP3": "现在写下的还是占位。纸面和计数已经在了。站会一个一个写进去。",
+    "feed": "RSS"
   },
   "notFound": {
-    "title": "",
-    "lede": "",
-    "back": "回到首页"
+    "title": "找不到这一页",
+    "lede": "这个站可能还没写。",
+    "back": "回到站点"
   }
 }

@@ -10,6 +10,8 @@ withDefaults(defineProps<{
   long?: boolean
   /** A shorter head for reference pages, where the content should start above the fold. */
   compact?: boolean
+  /** Latin line the pen handwrites. The hand font has no CJK glyphs. */
+  hand?: string | null
 }>(), {
   kicker: null,
   kickerName: 'kicker',
@@ -17,6 +19,7 @@ withDefaults(defineProps<{
   titleName: 'title',
   lede: null,
   ledeName: 'lede',
+  hand: null,
 })
 </script>
 
@@ -36,6 +39,18 @@ withDefaults(defineProps<{
         :size="long ? 12 : 5"
       />
     </h1>
+    <p
+      v-if="hand"
+      class="l-tagline"
+      data-anchor="tagline"
+      lang="en"
+    >
+      <Fill
+        :value="hand"
+        name="obs.hand"
+        :size="12"
+      />
+    </p>
     <div
       class="l-page-foot"
       data-anchor="rule"

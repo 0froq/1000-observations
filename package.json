@@ -1,10 +1,10 @@
 {
-  "name": "paper-landing",
+  "name": "1000-observations",
   "type": "module",
   "version": "0.1.0",
   "private": true,
   "packageManager": "pnpm@10.15.0",
-  "description": "A quiet product site template: paper, one pen line and a handwritten sentence.",
+  "description": "1000o. — a thousand personal sites, each a folder of notes.",
   "scripts": {
     "dev": "nuxt dev",
     "build": "nuxt build",
@@ -21,6 +21,7 @@
     "@fontsource-variable/geist": "catalog:prod",
     "@fontsource-variable/geist-mono": "catalog:prod",
     "@fontsource/instrument-serif": "catalog:prod",
+    "@froq/ui": "file:vendor/ui",
     "@nuxt/content": "catalog:prod",
     "@nuxtjs/i18n": "catalog:prod",
     "nuxt": "catalog:prod",

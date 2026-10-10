@@ -1,18 +1,23 @@
+import process from 'node:process'
 import { keepEmptyTitle } from './shared/empty-title'
-import { markFinalStop } from './shared/final-mark'
 
 export default defineNuxtConfig({
   compatibilityDate: '2026-09-19',
 
-  hooks: {
-    // Notes and docs have no `::final`; the stop that ends the text blooms instead.
-    // An explicit `title: ''` must stay empty: Content otherwise names the page after the file.
-    'content:file:afterParse': ({ file, content, collection }) => {
-      keepEmptyTitle(content, file.body)
-      if (collection.name === 'notes' || collection.name === 'docs')
-        markFinalStop(content.body)
+  runtimeConfig: {
+    public: {
+      siteUrl: process.env.NUXT_PUBLIC_SITE_URL || 'http://localhost:3000',
     },
   },
+
+  hooks: {
+    // An explicit `title: ''` must stay empty: Content otherwise names the page after the file.
+    'content:file:afterParse': ({ file, content }) => {
+      keepEmptyTitle(content, file.body)
+    },
+  },
+
+  build: { transpile: ['@froq/ui'] },
 
   modules: [
     '@nuxt/content',
@@ -26,6 +31,7 @@ export default defineNuxtConfig({
     '@fontsource/instrument-serif/400.css',
     '@fontsource/instrument-serif/400-italic.css',
     '~/assets/css/kit.css',
+    '@froq/ui/style.css',
   ],
 
   app: {
@@ -69,7 +75,7 @@ export default defineNuxtConfig({
     },
     prerender: {
       crawlLinks: true,
-      routes: ['/', '/zh'],
+      routes: ['/', '/zh', '/feed.xml'],
     },
   },
 

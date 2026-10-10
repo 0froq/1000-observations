@@ -1,17 +1,18 @@
 {
   "site": {
-    "title": "",
+    "title": "1000o.",
     "skip": "Skip to content",
-    "footer": ""
+    "footer": "froQ · a thousand sites worth keeping"
   },
   "theme": {
     "dark": "Dark",
     "light": "Light"
   },
   "nav": {
-    "docs": "Docs",
-    "notes": "Notes",
-    "changelog": "Changelog",
+    "observations": "Sites",
+    "tags": "Tags",
+    "sites": "Sites",
+    "about": "About",
     "sections": "On this page"
   },
   "install": {
@@ -21,33 +22,46 @@
     "copy": "Copy",
     "copied": "Copied"
   },
-  "notes": {
-    "label": "Notes",
-    "title": "",
-    "lede": "",
-    "count": "{n} notes",
-    "read": "Read",
-    "minutes": "{n} min read",
-    "back": "All notes",
-    "next": "Next note",
-    "end": ""
-  },
-  "changelog": {
-    "label": "Changelog",
-    "title": "",
-    "lede": "",
-    "count": "{n} releases",
-    "latest": "latest",
-    "end": ""
-  },
-  "docs": {
-    "label": "Docs",
+  "obs": {
+    "kicker": "Personal sites",
+    "hand": "look closer.",
+    "indexTitle": "Sites worth looking at.",
+    "indexLede": "A thousand sites. Each one is a folder of notes, and the sidebar is that folder. Placeholders for now.",
+    "search": "Search",
+    "searchPlaceholder": "Site names or notes…",
+    "sort": "Sort",
+    "sortNumber": "By number",
+    "sortNewest": "Newest",
+    "filterTags": "Filter by tag",
+    "clearTags": "Clear tags",
+    "empty": "No sites match.",
+    "read": "Open",
+    "docCount": "{n} notes",
+    "loadMore": "Load {n} more",
+    "back": "All sites",
     "prev": "Previous",
-    "next": "Next"
+    "next": "Next",
+    "tags": "Tags",
+    "related": "More in this vein",
+    "observedSite": "Site",
+    "tagsTitle": "Tags",
+    "tagsLede": "A small vocabulary for what caught the eye.",
+    "tagLede": "Sites that linger on {tag}.",
+    "allTags": "All tags",
+    "sitesTitle": "The sites",
+    "sitesLede": "Personal sites collected here, grouped by URL.",
+    "sitesCount": "{n} sites",
+    "entryCount": "{n} notes",
+    "aboutTitle": "About",
+    "aboutLede": "A thousand sites, each a folder of notes.",
+    "aboutP1": "1000o. is froQ’s notebook of personal sites. The thousand is a thousand sites, not a thousand notes.",
+    "aboutP2": "Each site is a folder. The notes in it are the things worth a second look: a homepage, a margin, a line of type. The sidebar is that folder.",
+    "aboutP3": "What is here now is still a placeholder. The paper and the count are already in place. The sites get written in one at a time.",
+    "feed": "RSS"
   },
   "notFound": {
-    "title": "",
-    "lede": "",
-    "back": "Back to home"
+    "title": "Not found",
+    "lede": "That site may not be written yet.",
+    "back": "Back to the sites"
   }
 }

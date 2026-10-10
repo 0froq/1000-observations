@@ -22,6 +22,7 @@ const next = computed(() => theme.value === 'dark' ? 'light' : 'dark')
       >
         {{ t(item.label) }}
       </NuxtLink>
+      <a href="/feed.xml">{{ t('obs.feed') }}</a>
     </nav>
     <span class="l-controls">
       <NuxtLink

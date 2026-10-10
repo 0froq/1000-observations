@@ -113,26 +113,9 @@ export function cubic(p0: Point, t0: Point, p3: Point, t3: Point, n = 80): Point
   return pts
 }
 
-// Low-frequency hand tremor, perpendicular to the path, fading at both ends
-export function wobble(pts: Point[], amp: number, seed: number): Point[] {
-  const out: Point[] = []
-  let s = 0
-  for (let i = 0; i < pts.length; i++) {
-    const prev = pts[Math.max(0, i - 1)]!
-    const next = pts[Math.min(pts.length - 1, i + 1)]!
-    const cur = pts[i]!
-    const tx = next[0] - prev[0]
-    const ty = next[1] - prev[1]
-    const tl = Math.hypot(tx, ty) || 1
-    if (i > 0) {
-      const before = pts[i - 1]!
-      s += Math.hypot(cur[0] - before[0], cur[1] - before[1])
-    }
-    const k = Math.sin((i / (pts.length - 1)) * Math.PI)
-    const off = amp * k * (Math.sin(s * 0.006 + seed) * 0.65 + Math.sin(s * 0.017 + seed * 2.3) * 0.35)
-    out.push([cur[0] - (ty / tl) * off, cur[1] + (tx / tl) * off])
-  }
-  return out
+// The stroke stays on its path. Tremor used to push it off the line.
+export function wobble(pts: Point[], _amp: number, _seed: number): Point[] {
+  return pts
 }
 
 // Clockwise from the upper left; ends at the bottom heading left, so the pen leaves
@@ -152,38 +135,9 @@ export function looseEllipse(cx: number, cy: number, rx: number, ry: number, sta
   return pts
 }
 
-// A sharp join is redrawn as one curve through the whole run, so a ruled line
-// leaves along the pen and arrives along itself instead of staying dead straight.
-export function roundJoin(origin: Point, tIn: Point, poly: Point[]): Point[] {
-  const last = poly[poly.length - 1]
-  const head = poly[Math.min(poly.length - 1, 3)]
-  if (!last || !head || poly.length < 2)
-    return poly
-  const span = Math.hypot(last[0] - origin[0], last[1] - origin[1])
-  if (span < 10)
-    return poly
-  const hx = head[0] - poly[0]![0]
-  const hy = head[1] - poly[0]![1]
-  const hl = Math.hypot(hx, hy) || 1
-  if (tIn[0] * hx / hl + tIn[1] * hy / hl > 0.84)
-    return poly
-  const reach = Math.min(46, Math.max(18, span * 0.28))
-  let walked = 0
-  let idx = 1
-  for (; idx < poly.length; idx++) {
-    const p = poly[idx]!
-    const q = poly[idx - 1]!
-    walked += Math.hypot(p[0] - q[0], p[1] - q[1])
-    if (walked >= reach)
-      break
-  }
-  idx = Math.min(idx, poly.length - 1)
-  const at = poly[idx]!
-  const before = poly[Math.max(0, idx - 1)]!
-  const tl = Math.hypot(at[0] - before[0], at[1] - before[1]) || 1
-  const tOut: Point = [(at[0] - before[0]) / tl, (at[1] - before[1]) / tl]
-  const arc = cubic(origin, tIn, at, tOut, 16)
-  return [...arc.slice(0, -1), ...poly.slice(idx)]
+// Joins stay on the ruled path instead of bending into a curve.
+export function roundJoin(_origin: Point, _tIn: Point, poly: Point[]): Point[] {
+  return poly
 }
 
 export function tangent(pts: Point[], atEnd: boolean): Point {
