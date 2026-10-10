@@ -1749,13 +1749,14 @@ button.l-cta {
   }
 
   .site-docs-nav {
-    position: static;
+    position: relative;
+    z-index: 9;
     height: auto;
     padding: 88px 0 0;
     overflow: visible;
   }
 
   .site-docs-main {
-    padding-top: 28px;
+    padding-top: 22px;
   }
 }
