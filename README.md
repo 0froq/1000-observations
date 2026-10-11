@@ -60,7 +60,7 @@ node scripts/next-observation-number.mjs
 
 推到 `main` 后，由 Workers Builds（GitHub 连接，仓库不存放 API token）构建并发布。网页里新建的是 Worker，不是 Pages。构建命令是 `pnpm generate`，部署命令是 `pnpm exec cf deploy`。静态文件在 `dist`。Worker 配置在 `cloudflare.config.ts`，资源目录在 `wrangler.config.ts`。本地一次发布用 `pnpm deploy`。
 
-以后的站点按 [0froq/skills](https://github.com/0froq/skills) 里的 `cloudflare-sites` 做。不要照抄 void、paper-landing、lig。
+以后的站点按 [0froq/skills-pack](https://github.com/0froq/skills-pack) 里的 `cloudflare-sites` 做。不要照抄 void、paper-landing、lig。手写约定在 skills-pack。[0froq/skills](https://github.com/0froq/skills) 仍是 antfu/skills 的 fork。
 
 ```bash
 pnpm dev        # 开发
