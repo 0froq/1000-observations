@@ -1,9 +1,11 @@
 <script setup lang="ts">
+import type { ObservationTag } from '#shared/observation-tags'
 import type { SiteSort } from '~/composables/useSites'
+import { ToggleGroup } from '@froq/ui'
 import { OBSERVATION_TAG_LABELS, OBSERVATION_TAGS } from '#shared/observation-tags'
 
 const { locale, t } = useI18n()
-const { q, tags, sort, setSearch, toggleTag, clearTags, setSort } = useObservationFilters()
+const { q, tags, sort, setSearch, setTags, clearTags, setSort } = useObservationFilters()
 
 const searchDraft = ref(q.value)
 watch(q, (v) => {
@@ -20,6 +22,16 @@ function tagLabel(tag: typeof OBSERVATION_TAGS[number]): string {
   const labels = OBSERVATION_TAG_LABELS[tag]
   return locale.value === 'zh' ? labels.zh : labels.en
 }
+
+const tagOptions = computed(() => OBSERVATION_TAGS.map(tag => ({
+  value: tag,
+  label: tagLabel(tag),
+})))
+
+const selected = computed<ObservationTag[]>({
+  get: () => tags.value,
+  set: next => setTags(next),
+})
 
 function onSortChange(event: Event) {
   const value = (event.target as HTMLSelectElement).value as SiteSort
@@ -55,26 +67,18 @@ function onSortChange(event: Event) {
         </option>
       </select>
     </div>
-    <div
-      class="obs-tags"
-      role="group"
-      :aria-label="t('obs.filterTags')"
-    >
-      <button
-        v-for="tag in OBSERVATION_TAGS"
-        :key="tag"
-        type="button"
-        class="obs-tag"
-        :class="{ 'is-on': tags.includes(tag) }"
-        :aria-pressed="tags.includes(tag)"
-        @click="toggleTag(tag)"
-      >
-        {{ tagLabel(tag) }}
-      </button>
+    <div class="obs-tags">
+      <ToggleGroup
+        v-model="selected"
+        class="ui"
+        type="multiple"
+        :label="t('obs.filterTags')"
+        :options="tagOptions"
+      />
       <button
         v-if="tags.length"
         type="button"
-        class="obs-tag is-clear"
+        class="obs-clear"
         @click="clearTags"
       >
         {{ t('obs.clearTags') }}

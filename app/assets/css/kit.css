@@ -1416,37 +1416,22 @@ button.l-cta {
 .obs-tags {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
+  gap: 12px 16px;
+  align-items: end;
 }
 
-.obs-tag {
-  padding: 6px 12px;
-  border: 1px solid var(--line);
-  border-radius: 999px;
-  background: transparent;
+.obs-clear {
+  padding: 0 0 8px;
+  border: 0;
+  background: none;
   color: var(--muted);
   font-size: 13px;
   cursor: pointer;
-  transition:
-    color 0.25s,
-    border-color 0.25s,
-    background 0.25s;
 }
 
-.obs-tag:hover,
-.obs-tag:focus-visible {
+.obs-clear:hover,
+.obs-clear:focus-visible {
   color: var(--fg);
-  border-color: var(--muted);
-}
-
-.obs-tag.is-on {
-  color: var(--bg);
-  background: var(--fg);
-  border-color: var(--fg);
-}
-
-.obs-tag.is-clear {
-  border-style: dashed;
 }
 
 .obs-entry-meta {
@@ -1749,13 +1734,14 @@ button.l-cta {
   }
 
   .site-docs-nav {
-    position: static;
+    position: relative;
+    z-index: 9;
     height: auto;
     padding: 88px 0 0;
     overflow: visible;
   }
 
   .site-docs-main {
-    padding-top: 28px;
+    padding-top: 22px;
   }
 }
