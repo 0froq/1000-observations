@@ -1,6 +1,6 @@
 import type { ObservationTag } from '#shared/observation-tags'
 import type { SiteSort } from './useSites'
-import { isObservationTag } from '#shared/observation-tags'
+import { isObservationTag, OBSERVATION_TAGS } from '#shared/observation-tags'
 
 function parseTags(raw: unknown): ObservationTag[] {
   if (typeof raw !== 'string' || !raw.trim())
@@ -36,23 +36,27 @@ export function useObservationFilters() {
     pushQuery({ q: value || undefined })
   }
 
+  function setTags(next: readonly string[]) {
+    const ordered = OBSERVATION_TAGS.filter(tag => next.includes(tag))
+    pushQuery({ tags: ordered.length ? ordered.join(',') : undefined })
+  }
+
   function toggleTag(tag: ObservationTag) {
     const set = new Set(tags.value)
     if (set.has(tag))
       set.delete(tag)
     else
       set.add(tag)
-    const joined = [...set].join(',')
-    pushQuery({ tags: joined || undefined })
+    setTags([...set])
   }
 
   function clearTags() {
-    pushQuery({ tags: undefined })
+    setTags([])
   }
 
   function setSort(value: SiteSort) {
     pushQuery({ sort: value === 'number' ? undefined : value })
   }
 
-  return { q, tags, sort, setSearch, toggleTag, clearTags, setSort }
+  return { q, tags, sort, setSearch, setTags, toggleTag, clearTags, setSort }
 }

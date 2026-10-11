@@ -91,3 +91,15 @@ git subtree pull --prefix=vendor/ui https://github.com/0froq/ui.git main --squas
 - 改动在本项目的 git 历史里，还没有进入 https://github.com/0froq/ui ，除非用户另外要求推到上游。
 
 <!-- /froq-ui -->
+
+## Cursor Cloud specific instructions
+
+- Install with `pnpm install --frozen-lockfile`. `packageManager` is `pnpm@10.15.0`. The install warns that `vue-demi`'s build script is ignored; the dev server still starts.
+- The first `pnpm dev` stops on Nuxt's telemetry prompt. The port opens and does not answer until that prompt is skipped. Start it with:
+
+```bash
+NUXT_TELEMETRY_DISABLED=1 pnpm dev --host 0.0.0.0 --port 3000
+```
+
+- English is `/`. Chinese is `/zh`. Search writes `q`. A site is `/s/0001`. Tag filters write `tags`.
+- `pnpm lint` and `pnpm build` are the environment checks. `pnpm typecheck` currently fails on existing errors in `app/components/content/Hero.vue` and `server/routes/feed.xml.get.ts`. Content is Markdown. Nuxt Content uses its native sqlite database, so there is no separate database service and no required secret.

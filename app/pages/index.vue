@@ -22,6 +22,7 @@ useSeoMeta({ description: () => t('obs.indexLede') })
   <Sheet line>
     <PageHead
       class="is-screen"
+      long
       :kicker="copy('obs.kicker')"
       kicker-name="obs.kicker"
       :title="copy('obs.indexTitle')"
