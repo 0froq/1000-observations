@@ -1,9 +1,6 @@
-import type { LayerColors, PenLayer } from '@froq/ui/core'
+import type { LayerColors } from '@froq/ui/core'
 import type { Ref } from 'vue'
-import type { PaperLayer } from '~/kit/types'
-import { createPenStroke } from '@froq/ui/core'
-import { createPaper } from '~/kit/paper'
-import { settled } from '~/kit/settle'
+import { usePaperSignature } from '@froq/ui/vue'
 
 export interface SignatureOptions {
   /** The page leaves a margin for the pen; it still needs a `[data-anchor="rule"]`. */
@@ -37,8 +34,12 @@ function handCopy(el: HTMLElement | null): string {
   return (clone.textContent ?? '').trim()
 }
 
-function clearPenClasses(): void {
-  document.documentElement.classList.remove('has-hand', 'has-stroke')
+function paintSignatureClasses(hand: boolean, stroke: boolean, bloom: boolean): void {
+  const html = document.documentElement
+  // A handwritten tagline is the whole stroke, so the rule and the last stop stay as type.
+  html.classList.toggle('has-hand', hand)
+  html.classList.toggle('has-stroke', stroke && !hand)
+  html.classList.toggle('has-bloom', bloom)
 }
 
 /**
@@ -48,96 +49,66 @@ function clearPenClasses(): void {
 export function useSignature(root: Ref<HTMLElement | undefined>, options: SignatureOptions): void {
   const { product } = useAppConfig()
   const { theme } = useTheme()
-  let paper: PaperLayer | null = null
-  let pen: PenLayer | null = null
-  const timers: ReturnType<typeof setTimeout>[] = []
-  let alive = true
 
-  onMounted(async () => {
-    const el = root.value
-    if (!el)
-      return
-    await Promise.all([document.fonts.ready, settled(el)])
-    if (!alive)
-      return
-    const sig = product.signature
-    const find = (anchor: string): HTMLElement | null => el.querySelector<HTMLElement>(`[data-anchor="${anchor}"]`)
-    const mark = find('mark')
-    const finalMark = find('final-mark')
-    // A page with a line holds its last stop back for the pen; one without lets it bloom when seen
-    const line = sig.line && !!options.line && !!find('rule')
+  function find(anchor: string): HTMLElement | null {
+    return root.value?.querySelector<HTMLElement>(`[data-anchor="${anchor}"]`) ?? null
+  }
 
-    if (sig.paper) {
-      const marks = sig.bloom ? [mark, line ? null : finalMark].filter((m): m is HTMLElement => !!m) : []
-      paper = createPaper({
-        colors: readColors(),
-        marks,
-        washes: sig.bloom,
+  const signature = usePaperSignature(root, {
+    settings: () => {
+      const sig = product.signature
+      return {
+        paper: sig.paper,
+        bloom: sig.bloom,
+        line: sig.line && !!options.line,
+        hand: sig.hand,
         dwellAfter: sig.pointer.dwell === 'wash' ? sig.pointer.dwellAfter : 0,
         click: sig.pointer.click === 'wash',
+      }
+    },
+    anchors: () => {
+      const hand = find('tagline')
+      const sections = [...(root.value?.querySelectorAll<HTMLElement>('.l-section') ?? [])].flatMap((section) => {
+        const label = section.querySelector<HTMLElement>('[data-anchor="label"]')
+        if (!label)
+          return []
+        return [{ element: section, label, price: section.querySelector<HTMLElement>('[data-anchor="price"]') }]
       })
-    }
-    const washes = !!paper && sig.bloom
-    if (washes)
-      timers.push(setTimeout(() => paper?.bloom(), 250))
-    if (line) {
-      timers.push(setTimeout(() => {
-        const html = document.documentElement
-        pen = createPenStroke({
-          root: el,
-          anchors: () => {
-            const hand = sig.hand ? find('tagline') : null
-            const sections = [...el.querySelectorAll<HTMLElement>('.l-section')].flatMap((section) => {
-              const label = section.querySelector<HTMLElement>('[data-anchor="label"]')
-              if (!label)
-                return []
-              return [{ element: section, label, price: section.querySelector<HTMLElement>('[data-anchor="price"]') }]
-            })
-            const stop = find('final-mark')
-            return {
-              hand,
-              handText: handCopy(hand),
-              rule: find('rule'),
-              sections,
-              finalMark: stop,
-              finalSection: stop?.closest('section') ?? null,
-              margin: find('label'),
-            }
-          },
-          mixColors: mixHex,
-          onReady: (wroteHand) => {
-            html.classList.toggle('has-hand', wroteHand)
-            html.classList.toggle('has-stroke', !wroteHand)
-          },
-          colors: readColors(),
-          wet: (x, y) => paper?.wet(x, y) ?? 0,
-          flowing: () => paper?.flowing() ?? false,
-          onArrive: washes && finalMark ? () => paper?.soak(finalMark) : undefined,
-          // This page keeps the stroke on its path, and a tagline is the whole stroke.
-          tremor: false,
-          roundJoins: false,
-          fadeRoute: false,
-          continuePastHand: false,
-          labels: 'line',
-        })
-        if (!pen)
-          clearPenClasses()
-      }, 900))
-    }
+      const stop = find('final-mark')
+      return {
+        mark: find('mark'),
+        hand,
+        handText: handCopy(hand),
+        rule: find('rule'),
+        sections,
+        finalMark: stop,
+        finalSection: stop?.closest('section') ?? null,
+        margin: find('label'),
+      }
+    },
+    colors: readColors,
+    mixColors: mixHex,
+    // This page keeps the stroke on its path, and a tagline is the whole stroke.
+    tremor: false,
+    roundJoins: false,
+    fadeRoute: false,
+    continuePastHand: false,
+    labels: 'line',
   })
+
+  // The pen measures the tagline inside `onReady`. These classes have to land first.
+  watch(
+    () => [signature.state.hand, signature.state.stroke, signature.state.bloom] as const,
+    ([hand, stroke, bloom]) => paintSignatureClasses(hand, stroke, bloom),
+    { flush: 'sync' },
+  )
 
   watch(theme, async () => {
     await nextTick()
-    const colors = readColors()
-    paper?.setColors(colors)
-    pen?.setColors(colors)
+    signature.setColors()
   })
 
   onBeforeUnmount(() => {
-    alive = false
-    timers.forEach(clearTimeout)
-    paper?.destroy()
-    pen?.destroy()
-    clearPenClasses()
+    document.documentElement.classList.remove('has-hand', 'has-stroke', 'has-bloom')
   })
 }
