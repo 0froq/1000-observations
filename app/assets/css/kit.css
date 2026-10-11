@@ -105,6 +105,11 @@ code {
   background: var(--bg);
 }
 
+/* The library sheet uses --ui-bg, which is unset outside .ui. Keep this site's ground. */
+.l-site.ui-paper {
+  background: var(--bg);
+}
+
 .ui-paper-grain {
   position: absolute;
   z-index: 0;
