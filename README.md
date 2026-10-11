@@ -73,4 +73,4 @@ pnpm typecheck
 
 ## 许可
 
-手写字体来自 EMS Allure（Allura 的单线衍生版，Sheldon B. Michaels），SIL Open Font License 1.1，见 `app/kit/hand-font.ts` 文件头。
+手写字体来自 EMS Allure（Allura 的单线衍生版，Sheldon B. Michaels），SIL Open Font License 1.1，见 `vendor/ui/src/core/signature/hand-font.ts` 文件头。

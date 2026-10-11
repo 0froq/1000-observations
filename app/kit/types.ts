@@ -1,5 +1,3 @@
-export type Point = [number, number]
-
 export interface LayerColors {
   paper: string
   ink: string
@@ -34,30 +32,4 @@ export interface PaperLayer {
   flowing: () => boolean
   setColors: (colors: LayerColors) => void
   destroy: () => void
-}
-
-export interface PenOptions {
-  /** Page root; the route is read from `[data-anchor]` descendants. */
-  root: HTMLElement
-  /** Handwrite this element's text. Null or empty text skips the hand. */
-  hand?: HTMLElement | null
-  colors: LayerColors
-  /** Wash coverage at a document point. Covered ink is dyed. */
-  wet?: (x: number, y: number) => number
-  /** True while a wash is still spreading, so newly dyed ink gets redrawn. */
-  flowing?: () => boolean
-  /** Called when the pen reaches the final mark. Without it the pen dots the stop itself. */
-  onArrive?: () => void
-}
-
-export interface PenLayer {
-  setColors: (colors: LayerColors) => void
-  destroy: () => void
-}
-
-export interface GlyphLayout {
-  strokes: Point[][]
-  width: number
-  ascent: number
-  descent: number
 }
