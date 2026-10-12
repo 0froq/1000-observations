@@ -26,7 +26,10 @@ const entries = computed(() => OBSERVATION_TAGS.map((tag) => {
   }
 }))
 
-useHead({ title: () => t('obs.tagsTitle') })
+useShareMeta({
+  title: () => t('obs.tagsTitle'),
+  description: () => t('obs.tagsLede'),
+})
 </script>
 
 <template>

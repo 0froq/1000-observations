@@ -30,7 +30,10 @@ const tagLabel = computed(() => {
   return locale.value === 'zh' ? labels.zh : labels.en
 })
 
-useHead({ title: () => tagLabel.value })
+useShareMeta({
+  title: () => tagLabel.value,
+  description: () => t('obs.tagLede', { tag: tagLabel.value }),
+})
 </script>
 
 <template>

@@ -41,8 +41,19 @@ function tagLabel(tag: ObservationTag): string {
   return locale.value === 'zh' ? labels.zh : labels.en
 }
 
-useHead({ title: () => doc.value ? `${doc.value.title} — ${site.value?.title ?? ''}` : '' })
-useSeoMeta({ description: () => doc.value?.description })
+const shareTitle = computed(() => {
+  const docTitle = doc.value?.title?.trim() || ''
+  const siteTitle = site.value?.title?.trim() || ''
+  if (doc.value && site.value && doc.value.path !== site.value.path)
+    return docTitle && siteTitle ? `${docTitle} — ${siteTitle}` : docTitle || siteTitle
+  return docTitle || siteTitle
+})
+
+useShareMeta({
+  title: () => shareTitle.value,
+  description: () => doc.value?.description,
+  type: 'article',
+})
 </script>
 
 <template>

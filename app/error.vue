@@ -8,7 +8,11 @@ const { product } = useAppConfig()
 
 useHead({
   style: [{ key: 'theme', innerHTML: () => themeStyle(product.theme) }],
+})
+
+useShareMeta({
   title: () => copy('notFound.title'),
+  description: () => copy('notFound.lede'),
 })
 </script>
 
