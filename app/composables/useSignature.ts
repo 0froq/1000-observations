@@ -88,10 +88,10 @@ export function useSignature(root: Ref<HTMLElement | undefined>, options: Signat
     },
     colors: readColors,
     mixColors: mixHex,
-    // This page keeps the stroke on its path, and a tagline is the whole stroke.
+    // The stroke stays on its path, and a tagline is the whole stroke.
+    // Connecting routes fade toward the paper; the marks stay full ink.
     tremor: false,
     roundJoins: false,
-    fadeRoute: false,
     continuePastHand: false,
     labels: 'line',
   })
