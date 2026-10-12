@@ -14,8 +14,10 @@ const filtered = computed(() => {
 
 const count = computed(() => (sites.value ?? []).length)
 
-useHead({ title: () => t('obs.indexTitle') })
-useSeoMeta({ description: () => t('obs.indexLede') })
+useShareMeta({
+  title: () => t('obs.indexTitle'),
+  description: () => t('obs.indexLede'),
+})
 </script>
 
 <template>

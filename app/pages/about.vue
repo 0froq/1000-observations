@@ -2,7 +2,10 @@
 const { t } = useI18n()
 const copy = useCopy()
 
-useHead({ title: () => t('obs.aboutTitle') })
+useShareMeta({
+  title: () => t('obs.aboutTitle'),
+  description: () => t('obs.aboutLede'),
+})
 </script>
 
 <template>
