@@ -26,9 +26,24 @@ const entries = computed(() => OBSERVATION_TAGS.map((tag) => {
   }
 }))
 
+const files = useRuntimeConfig().public.publicFiles
+const contentPath = useContentPath()
+const override = computed(() => explicitContentCover({
+  collection: 'pages',
+  path: contentPath('/tags'),
+}, path => hasShareFile(files, path)))
+if (!override.value) {
+  defineOgImage('Paper', {
+    title: () => t('obs.tagsTitle'),
+    words: 0,
+  }, {
+    alt: () => t('obs.tagsTitle'),
+  })
+}
 useShareMeta({
   title: () => t('obs.tagsTitle'),
   description: () => t('obs.tagsLede'),
+  image: () => override.value ?? false,
 })
 </script>
 
