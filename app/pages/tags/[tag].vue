@@ -30,9 +30,24 @@ const tagLabel = computed(() => {
   return locale.value === 'zh' ? labels.zh : labels.en
 })
 
+const files = useRuntimeConfig().public.publicFiles
+const contentPath = useContentPath()
+const override = computed(() => explicitContentCover({
+  collection: 'pages',
+  path: contentPath(`/tags/${routeTag.value}`),
+}, path => hasShareFile(files, path)))
+if (!override.value) {
+  defineOgImage('Paper', {
+    title: () => tagLabel.value,
+    words: 0,
+  }, {
+    alt: () => tagLabel.value,
+  })
+}
 useShareMeta({
   title: () => tagLabel.value,
   description: () => t('obs.tagLede', { tag: tagLabel.value }),
+  image: () => override.value ?? false,
 })
 </script>
 

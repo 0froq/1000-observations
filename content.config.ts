@@ -1,7 +1,21 @@
 import { defineCollection, defineContentConfig, z } from '@nuxt/content'
+import { defineOgImageSchema } from 'nuxt-og-image/content'
 import { OBSERVATION_TAGS } from './shared/observation-tags'
 
 const tagSchema = z.enum(OBSERVATION_TAGS)
+
+// Optional frontmatter `cover`: a `public/` path or an absolute https URL. It wins over `ogImage.url`.
+// `ogImage: false` turns the card off. `words` is filled at parse time for the card; it is not frontmatter.
+const card = {
+  cover: z.string().optional(),
+  ogImage: defineOgImageSchema({ z }),
+  words: z.number().optional(),
+  evergreen: z.boolean().optional(),
+  kind: z.string().optional(),
+  created: z.string().optional(),
+  updated: z.string().optional(),
+  last_modified: z.string().optional(),
+}
 
 /**
  * One directory per site (`content/sites/0042/`).
@@ -21,6 +35,7 @@ export default defineContentConfig({
         label: z.string().optional(),
         nav: z.string().optional(),
         order: z.number().default(0),
+        ...card,
       }),
     }),
   },

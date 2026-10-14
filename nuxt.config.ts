@@ -1,19 +1,29 @@
 import process from 'node:process'
+import { countCardWords } from '@froq/og-covers-layer/card-words'
+import { IMAGE_ORIGIN } from './app/utils/site'
 import { keepEmptyTitle } from './shared/empty-title'
+import { listPublicShareImages } from './shared/public-files'
 
 export default defineNuxtConfig({
-  compatibilityDate: '2026-09-19',
+  extends: [
+    ['github:0froq/og-layer#v0.1.0', { install: true }],
+  ],
 
-  runtimeConfig: {
-    public: {
-      siteUrl: process.env.NUXT_PUBLIC_SITE_URL || 'http://localhost:3000',
-    },
-  },
+  compatibilityDate: '2026-09-19',
 
   hooks: {
     // An explicit `title: ''` must stay empty: Content otherwise names the page after the file.
     'content:file:afterParse': ({ file, content }) => {
       keepEmptyTitle(content, file.body)
+      if (typeof file.body === 'string')
+        (content as { words?: number }).words = countCardWords(file.body)
+    },
+  },
+
+  runtimeConfig: {
+    public: {
+      siteUrl: process.env.NUXT_PUBLIC_SITE_URL || 'http://localhost:3000',
+      publicFiles: listPublicShareImages(),
     },
   },
 
@@ -24,6 +34,14 @@ export default defineNuxtConfig({
     '@nuxtjs/i18n',
     '@nuxt/eslint',
   ],
+
+  devtools: { enabled: true },
+
+  // `og:image` is absolute on this origin. `og:url` stays on 1000o.froq.me via useShareMeta.
+  site: {
+    url: IMAGE_ORIGIN,
+    name: '1000o',
+  },
 
   css: [
     '@fontsource-variable/geist/index.css',
@@ -67,9 +85,11 @@ export default defineNuxtConfig({
     defaultLocale: 'en',
     strategy: 'prefix_except_default',
     detectBrowserLanguage: false,
+    baseUrl: IMAGE_ORIGIN,
   },
 
   nitro: {
+    preset: 'static',
     output: {
       publicDir: 'dist',
     },

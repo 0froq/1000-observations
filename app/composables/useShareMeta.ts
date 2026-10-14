@@ -1,56 +1,76 @@
 import type { MaybeRefOrGetter } from 'vue'
-import { computed, toValue } from 'vue'
+import { absoluteImageUrl, canonicalUrl, OG_IMAGE_HEIGHT, OG_IMAGE_PATH, OG_IMAGE_WIDTH } from '~/utils/site'
 
-/** Custom domain for the `1000-observations` worker. */
-export const PRODUCTION_ORIGIN = 'https://1000o.froq.me'
-
-export const OG_IMAGE_URL = `${PRODUCTION_ORIGIN}/og.png`
-
-export function productionUrl(path: string): string {
-  const trimmed = path.replace(/\/+$/, '')
-  return `${PRODUCTION_ORIGIN}${trimmed || '/'}`
+export interface ShareMetaInput {
+  title?: MaybeRefOrGetter<string | undefined>
+  description?: MaybeRefOrGetter<string | undefined>
+  type?: MaybeRefOrGetter<'website' | 'article' | undefined>
+  /**
+   * Share image path or https URL.
+   * `false` when defineOgImage owns `og:image`.
+   * Omitted routes use `/og.png`.
+   */
+  image?: MaybeRefOrGetter<string | false | undefined>
 }
 
-export function useShareMeta(options: {
-  title?: MaybeRefOrGetter<string | null | undefined>
-  description?: MaybeRefOrGetter<string | null | undefined>
-  type?: MaybeRefOrGetter<'website' | 'article'>
-} = {}): void {
-  const { t } = useI18n()
+function filled(value: string | undefined, fallback: string): string {
+  const text = value?.trim()
+  return text || fallback
+}
+
+/**
+ * Open Graph / Twitter tags for the current route.
+ * `og:url` stays on the site origin. Image URLs use the Worker origin.
+ */
+export function useShareMeta(input: ShareMetaInput = {}): void {
   const route = useRoute()
+  const { t } = useI18n()
+  const { product } = useAppConfig()
 
-  const title = computed(() => {
-    const value = toValue(options.title)?.trim()
-    return value || t('site.title')
+  const title = computed(() => filled(toValue(input.title), t('site.title')))
+  const description = computed(() => filled(toValue(input.description), t('obs.indexLede')))
+  const type = computed(() => toValue(input.type) ?? 'website')
+  const url = computed(() => canonicalUrl(route.path))
+  const skipImage = toValue(input.image) === false
+  const image = computed(() => {
+    const value = toValue(input.image)
+    if (value === false || !value)
+      return absoluteImageUrl(OG_IMAGE_PATH)
+    return absoluteImageUrl(value)
   })
-  const description = computed(() => {
-    const value = toValue(options.description)?.trim()
-    return value || t('obs.indexLede')
-  })
-  const type = computed(() => toValue(options.type) ?? 'website')
 
-  if (options.title !== undefined) {
+  if (input.title !== undefined) {
     useHead({
-      title: () => toValue(options.title)?.trim() || undefined,
+      title: () => toValue(input.title)?.trim() || undefined,
     })
   }
 
   useSeoMeta({
     description: () => description.value,
-    ogType: () => type.value,
-    ogSiteName: '1000o.',
     ogTitle: () => title.value,
     ogDescription: () => description.value,
-    ogUrl: () => productionUrl(route.path),
-    ogImage: OG_IMAGE_URL,
-    ogImageSecureUrl: OG_IMAGE_URL,
-    ogImageType: 'image/png',
-    ogImageWidth: 1200,
-    ogImageHeight: 630,
-    ogImageAlt: '1000o.',
+    ogUrl: () => url.value,
+    ogType: () => type.value,
+    ogSiteName: () => `${product.name}${product.mark}`,
     twitterCard: 'summary_large_image',
     twitterTitle: () => title.value,
     twitterDescription: () => description.value,
-    twitterImage: OG_IMAGE_URL,
+  })
+
+  if (!skipImage) {
+    useSeoMeta({
+      ogImage: () => image.value,
+      ogImageSecureUrl: () => image.value,
+      ogImageType: 'image/png',
+      ogImageWidth: OG_IMAGE_WIDTH,
+      ogImageHeight: OG_IMAGE_HEIGHT,
+      ogImageAlt: () => title.value,
+      twitterImage: () => image.value,
+      twitterImageAlt: () => title.value,
+    })
+  }
+
+  useHead({
+    link: [{ rel: 'canonical', href: () => url.value }],
   })
 }

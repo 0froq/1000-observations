@@ -49,10 +49,25 @@ const shareTitle = computed(() => {
   return docTitle || siteTitle
 })
 
+const files = useRuntimeConfig().public.publicFiles
+const override = computed(() => contentOgOverride(doc.value, 'documents', files))
+if (override.value === undefined) {
+  defineOgImage(ogComponentName(doc.value), {
+    title: () => paperFields(doc.value).title || shareTitle.value,
+    evergreen: () => paperFields(doc.value).evergreen,
+    created: () => paperFields(doc.value).created || doc.value?.date || '',
+    updated: () => paperFields(doc.value).updated,
+    words: () => paperFields(doc.value).words,
+    ...ogExtraProps(doc.value),
+  }, {
+    alt: () => shareTitle.value,
+  })
+}
 useShareMeta({
   title: () => shareTitle.value,
   description: () => doc.value?.description,
   type: 'article',
+  image: () => override.value === undefined ? false : override.value,
 })
 </script>
 
