@@ -4,6 +4,7 @@ import type { NuxtError } from '#app'
 const props = defineProps<{ error: NuxtError }>()
 const copy = useCopy()
 const link = useKitLink()
+const { t } = useI18n()
 const { product } = useAppConfig()
 
 useHead({
@@ -18,6 +19,7 @@ const override = computed(() => explicitContentCover({
 if (!override.value) {
   defineOgImage('Paper', {
     title: () => copy('notFound.title'),
+    description: () => copy('notFound.lede') || t('obs.indexLede'),
     words: 0,
   }, {
     alt: () => copy('notFound.title'),

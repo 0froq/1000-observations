@@ -54,6 +54,7 @@ const override = computed(() => contentOgOverride(doc.value, 'documents', files)
 if (override.value === undefined) {
   defineOgImage(ogComponentName(doc.value), {
     title: () => paperFields(doc.value).title || shareTitle.value,
+    description: () => paperFields(doc.value, t('obs.indexLede')).description,
     evergreen: () => paperFields(doc.value).evergreen,
     created: () => paperFields(doc.value).created || doc.value?.date || '',
     updated: () => paperFields(doc.value).updated,
