@@ -21,8 +21,7 @@ const SITE_ROOT = /^\/sites\/\d{4}$/
 
 function parentPath(path: string): string | null {
   const slash = path.lastIndexOf('/')
-  if (slash <= 0)
-    return null
+  if (slash <= 0) return null
   return path.slice(0, slash)
 }
 
@@ -37,8 +36,7 @@ function itemLabel(doc: SiteDocNav): string {
 /** Public path for a document. `/sites/0001/type/scale` → `/s/0001/type/scale`. */
 export function documentHref(contentPath: string): string {
   const match = contentPath.match(/^\/sites\/(\d{4})(?:\/(.*))?$/)
-  if (!match)
-    return '/'
+  if (!match) return '/'
   return match[2] ? `/s/${match[1]}/${match[2]}` : `/s/${match[1]}`
 }
 
@@ -53,8 +51,7 @@ export function sidebarGroups(docs: SiteDocNav[]): NavGroup[] {
 
   for (const doc of docs) {
     const parent = parentPath(doc.path)
-    if (!parent || SITE_ROOT.test(parent) || !byPath.has(parent))
-      continue
+    if (!parent || SITE_ROOT.test(parent) || !byPath.has(parent)) continue
     childPaths.add(doc.path)
   }
 
@@ -70,7 +67,7 @@ export function sidebarGroups(docs: SiteDocNav[]): NavGroup[] {
     }
   }
 
-  const groups = new Map<string, { order: number, items: NavItem[] }>()
+  const groups = new Map<string, { order: number; items: NavItem[] }>()
   for (const doc of docs.filter(item => !childPaths.has(item.path)).sort(byOrder)) {
     const key = doc.nav ?? ''
     const group = groups.get(key) ?? { order: doc.order ?? 0, items: [] }
@@ -92,12 +89,10 @@ export function flattenNav(groups: NavGroup[]): NavItem[] {
   function walk(items: NavItem[]): void {
     for (const item of items) {
       pages.push(item)
-      if (item.children?.length)
-        walk(item.children)
+      if (item.children?.length) walk(item.children)
     }
   }
-  for (const group of groups)
-    walk(group.items)
+  for (const group of groups) walk(group.items)
   return pages
 }
 

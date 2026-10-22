@@ -11,8 +11,7 @@ const dir = join(process.cwd(), 'content/sites')
 const ids = readdirSync(dir).filter(name => /^\d{4}$/.test(name))
 const used = new Set(ids.map(id => Number.parseInt(id, 10)))
 let next = 1
-while (used.has(next) && next <= 1000)
-  next++
+while (used.has(next) && next <= 1000) next++
 if (next > 1000) {
   console.error('All 1000 slots are taken.')
   process.exit(1)

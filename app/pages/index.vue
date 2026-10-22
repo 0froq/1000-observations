@@ -16,18 +16,27 @@ const count = computed(() => (sites.value ?? []).length)
 
 const files = useRuntimeConfig().public.publicFiles
 const contentPath = useContentPath()
-const override = computed(() => explicitContentCover({
-  collection: 'pages',
-  path: contentPath('/'),
-}, path => hasShareFile(files, path)))
+const override = computed(() =>
+  explicitContentCover(
+    {
+      collection: 'pages',
+      path: contentPath('/'),
+    },
+    path => hasShareFile(files, path),
+  ),
+)
 if (!override.value) {
-  defineOgImage('Paper', {
-    title: () => t('obs.indexTitle'),
-    description: () => t('obs.indexLede'),
-    words: 0,
-  }, {
-    alt: () => t('obs.indexTitle'),
-  })
+  defineOgImage(
+    'Paper',
+    {
+      title: () => t('obs.indexTitle'),
+      description: () => t('obs.indexLede'),
+      words: 0,
+    },
+    {
+      alt: () => t('obs.indexTitle'),
+    },
+  )
 }
 useShareMeta({
   title: () => t('obs.indexTitle'),

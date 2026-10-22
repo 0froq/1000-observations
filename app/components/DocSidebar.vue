@@ -21,26 +21,25 @@ function items(entries: NavItem[]): SidebarItem[] {
   }))
 }
 
-const groups = computed<SidebarGroup[]>(() => props.groups.map(group => ({
-  label: group.label,
-  items: items(group.items),
-})))
+const groups = computed<SidebarGroup[]>(() =>
+  props.groups.map(group => ({
+    label: group.label,
+    items: items(group.items),
+  })),
+)
 
 function findCurrent(entries: NavItem[]): NavItem | undefined {
   for (const item of entries) {
     const child = item.children && findCurrent(item.children)
-    if (child)
-      return child
-    if (route.path.replace(/\/$/, '') === link(item.to).replace(/\/$/, ''))
-      return item
+    if (child) return child
+    if (route.path.replace(/\/$/, '') === link(item.to).replace(/\/$/, '')) return item
   }
 }
 
 const currentItem = computed(() => {
   for (const group of props.groups) {
     const item = findCurrent(group.items)
-    if (item)
-      return item
+    if (item) return item
   }
   return undefined
 })
@@ -55,25 +54,21 @@ function close(): void {
 }
 
 function onKey(event: KeyboardEvent): void {
-  if (event.key === 'Escape')
-    close()
+  if (event.key === 'Escape') close()
 }
 
 function onPointer(event: PointerEvent): void {
   const target = event.target
-  if (target instanceof Node && frame.value?.contains(target))
-    return
+  if (target instanceof Node && frame.value?.contains(target)) return
   close()
 }
 
 function setDismiss(active: boolean): void {
-  if (!import.meta.client)
-    return
+  if (!import.meta.client) return
   if (active) {
     document.addEventListener('keydown', onKey)
     document.addEventListener('pointerdown', onPointer)
-  }
-  else {
+  } else {
     document.removeEventListener('keydown', onKey)
     document.removeEventListener('pointerdown', onPointer)
   }
