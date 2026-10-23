@@ -1,3 +1,4 @@
+import { queryCollection } from '@nuxt/content/nitro'
 import { formatObservationId } from '#shared/observations'
 
 export default defineEventHandler(async event => {

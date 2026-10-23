@@ -1,31 +1,15 @@
 <script setup lang="ts">
 // The wordmark, the handwritten line and the first call to action. The pen starts on its rule.
-const props = withDefaults(
+withDefaults(
   defineProps<{
     tagline?: string | null
     lede?: string | null
-    /** Link the latest changelog entry. */
-    release?: boolean
     cta?: boolean
   }>(),
-  { tagline: null, lede: null, release: true, cta: true },
+  { tagline: null, lede: null, cta: true },
 )
 
 const { product } = useAppConfig()
-const { locale } = useI18n()
-const contentPath = useContentPath()
-const link = useKitLink()
-
-const { data: latest } = await useAsyncData(
-  () => `latest-release-${locale.value}`,
-  () =>
-    props.release
-      ? queryCollection('changelog')
-          .where('path', 'LIKE', `${contentPath('/changelog')}/%`)
-          .order('date', 'DESC')
-          .first()
-      : Promise.resolve(null),
-)
 
 // Long names shrink so the word always fits the width
 const length = computed(() => Math.max(3, [...(product.name || 'name')].length))
@@ -64,23 +48,6 @@ const length = computed(() => Math.max(3, [...(product.name || 'name')].length))
           :size="10"
         />
       </p>
-      <NuxtLink
-        v-if="latest"
-        class="l-release"
-        :to="link('/changelog')"
-      >
-        <span
-          ><Fill
-            :value="latest.version"
-            name="changelog.version"
-            :size="6"
-        /></span>
-        <Fill
-          :value="latest.title"
-          name="changelog.title"
-          :size="12"
-        />
-      </NuxtLink>
       <p class="l-lede">
         <Fill
           :value="lede"
