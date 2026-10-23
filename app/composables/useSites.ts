@@ -24,7 +24,10 @@ export function useSitesLoader() {
       .select('path', 'number', 'title', 'description', 'date', 'tags', 'url')
       .all()
     return all
-      .filter((item): item is typeof item & { number: number, date: string } => item.number != null && item.date != null)
+      .filter(
+        (item): item is typeof item & { number: number; date: string } =>
+          item.number != null && item.date != null,
+      )
       .map(site => ({
         path: site.path,
         number: site.number,
@@ -33,7 +36,8 @@ export function useSitesLoader() {
         date: site.date,
         tags: site.tags ?? [],
         url: site.url,
-        docs: all.filter(item => item.path === site.path || item.path.startsWith(`${site.path}/`)).length,
+        docs: all.filter(item => item.path === site.path || item.path.startsWith(`${site.path}/`))
+          .length,
       }))
       .sort((a, b) => a.number - b.number)
   })
@@ -52,21 +56,21 @@ export function sortSites(items: SiteListItem[], sort: SiteSort): SiteListItem[]
 
 export function filterSites(
   items: SiteListItem[],
-  query: { q: string, tags: ObservationTag[] },
+  query: { q: string; tags: ObservationTag[] },
 ): SiteListItem[] {
   const q = query.q.trim().toLowerCase()
   const tagSet = new Set(query.tags)
-  return items.filter((item) => {
-    if (tagSet.size && !item.tags.some(tag => tagSet.has(tag)))
-      return false
-    if (!q)
-      return true
+  return items.filter(item => {
+    if (tagSet.size && !item.tags.some(tag => tagSet.has(tag))) return false
+    if (!q) return true
     const hay = [
       formatObservationId(item.number),
       item.title,
       item.description ?? '',
       item.url ?? '',
-    ].join(' ').toLowerCase()
+    ]
+      .join(' ')
+      .toLowerCase()
     return hay.includes(q)
   })
 }

@@ -34,7 +34,13 @@ export default defineAppConfig({
         accent: '#ff6242',
       },
     },
-    signature: { paper: false, line: true, hand: true, bloom: false, pointer: { dwell: false, click: false, dwellAfter: 1.2 } },
+    signature: {
+      paper: false,
+      line: true,
+      hand: true,
+      bloom: false,
+      pointer: { dwell: false, click: false, dwellAfter: 1.2 },
+    },
     install: { href: '/about' },
     nav: [
       { label: 'nav.observations', to: '/' },

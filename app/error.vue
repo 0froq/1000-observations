@@ -12,18 +12,27 @@ useHead({
 })
 
 const files = useRuntimeConfig().public.publicFiles
-const override = computed(() => explicitContentCover({
-  collection: 'pages',
-  path: '/en/__not-found__',
-}, path => hasShareFile(files, path)))
+const override = computed(() =>
+  explicitContentCover(
+    {
+      collection: 'pages',
+      path: '/en/__not-found__',
+    },
+    path => hasShareFile(files, path),
+  ),
+)
 if (!override.value) {
-  defineOgImage('Paper', {
-    title: () => copy('notFound.title'),
-    description: () => copy('notFound.lede') || t('obs.indexLede'),
-    words: 0,
-  }, {
-    alt: () => copy('notFound.title'),
-  })
+  defineOgImage(
+    'Paper',
+    {
+      title: () => copy('notFound.title'),
+      description: () => copy('notFound.lede') || t('obs.indexLede'),
+      words: 0,
+    },
+    {
+      alt: () => copy('notFound.title'),
+    },
+  )
 }
 useShareMeta({
   title: () => copy('notFound.title'),

@@ -14,9 +14,12 @@ const visible = ref(OBSERVATION_PAGE_SIZE)
 const slice = computed(() => props.items.slice(0, visible.value))
 const hasMore = computed(() => visible.value < props.items.length)
 
-watch(() => props.items, () => {
-  visible.value = OBSERVATION_PAGE_SIZE
-})
+watch(
+  () => props.items,
+  () => {
+    visible.value = OBSERVATION_PAGE_SIZE
+  },
+)
 
 function loadMore() {
   visible.value = Math.min(props.items.length, visible.value + OBSERVATION_PAGE_SIZE)

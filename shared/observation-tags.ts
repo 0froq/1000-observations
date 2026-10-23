@@ -9,9 +9,9 @@ export const OBSERVATION_TAGS = [
   'performance',
 ] as const
 
-export type ObservationTag = typeof OBSERVATION_TAGS[number]
+export type ObservationTag = (typeof OBSERVATION_TAGS)[number]
 
-export const OBSERVATION_TAG_LABELS: Record<ObservationTag, { zh: string, en: string }> = {
+export const OBSERVATION_TAG_LABELS: Record<ObservationTag, { zh: string; en: string }> = {
   layout: { zh: '版式', en: 'Layout' },
   typography: { zh: '字体', en: 'Typography' },
   interaction: { zh: '交互', en: 'Interaction' },

@@ -32,18 +32,27 @@ const tagLabel = computed(() => {
 
 const files = useRuntimeConfig().public.publicFiles
 const contentPath = useContentPath()
-const override = computed(() => explicitContentCover({
-  collection: 'pages',
-  path: contentPath(`/tags/${routeTag.value}`),
-}, path => hasShareFile(files, path)))
+const override = computed(() =>
+  explicitContentCover(
+    {
+      collection: 'pages',
+      path: contentPath(`/tags/${routeTag.value}`),
+    },
+    path => hasShareFile(files, path),
+  ),
+)
 if (!override.value) {
-  defineOgImage('Paper', {
-    title: () => tagLabel.value,
-    description: () => t('obs.tagLede', { tag: tagLabel.value }) || t('obs.indexLede'),
-    words: 0,
-  }, {
-    alt: () => tagLabel.value,
-  })
+  defineOgImage(
+    'Paper',
+    {
+      title: () => tagLabel.value,
+      description: () => t('obs.tagLede', { tag: tagLabel.value }) || t('obs.indexLede'),
+      words: 0,
+    },
+    {
+      alt: () => tagLabel.value,
+    },
+  )
 }
 useShareMeta({
   title: () => tagLabel.value,

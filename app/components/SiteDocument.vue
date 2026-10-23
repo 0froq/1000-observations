@@ -16,15 +16,16 @@ if (number.value == null)
 const id = computed(() => formatObservationId(number.value!))
 const slug = computed(() => {
   const raw = route.params.slug
-  if (!raw)
-    return ''
+  if (!raw) return ''
   // A trailing slash arrives as an empty segment. It is not part of the document path.
   return (Array.isArray(raw) ? raw : [raw])
     .flatMap(segment => segment.split('/'))
     .filter(segment => segment.length > 0)
     .join('/')
 })
-const contentPath = computed(() => slug.value ? `/sites/${id.value}/${slug.value}` : `/sites/${id.value}`)
+const contentPath = computed(() =>
+  slug.value ? `/sites/${id.value}/${slug.value}` : `/sites/${id.value}`,
+)
 
 const { site, docs, pages } = await useSiteTree(id)
 const doc = computed(() => docs.value.find(item => item.path === contentPath.value) ?? null)
@@ -32,8 +33,10 @@ const doc = computed(() => docs.value.find(item => item.path === contentPath.val
 if (!doc.value || !site.value)
   throw createError({ statusCode: 404, statusMessage: 'Not found', fatal: true })
 
-const index = computed(() => pages.value.findIndex(item => item.to === documentHref(doc.value!.path)))
-const prev = computed(() => index.value > 0 ? pages.value[index.value - 1] : undefined)
+const index = computed(() =>
+  pages.value.findIndex(item => item.to === documentHref(doc.value!.path)),
+)
+const prev = computed(() => (index.value > 0 ? pages.value[index.value - 1] : undefined))
 const next = computed(() => pages.value[index.value + 1])
 
 function tagLabel(tag: ObservationTag): string {
@@ -52,23 +55,27 @@ const shareTitle = computed(() => {
 const files = useRuntimeConfig().public.publicFiles
 const override = computed(() => contentOgOverride(doc.value, 'documents', files))
 if (override.value === undefined) {
-  defineOgImage(ogComponentName(doc.value), {
-    title: () => paperFields(doc.value).title || shareTitle.value,
-    description: () => paperFields(doc.value, t('obs.indexLede')).description,
-    evergreen: () => paperFields(doc.value).evergreen,
-    created: () => paperFields(doc.value).created || doc.value?.date || '',
-    updated: () => paperFields(doc.value).updated,
-    words: () => paperFields(doc.value).words,
-    ...ogExtraProps(doc.value),
-  }, {
-    alt: () => shareTitle.value,
-  })
+  defineOgImage(
+    ogComponentName(doc.value),
+    {
+      title: () => paperFields(doc.value).title || shareTitle.value,
+      description: () => paperFields(doc.value, t('obs.indexLede')).description,
+      evergreen: () => paperFields(doc.value).evergreen,
+      created: () => paperFields(doc.value).created || doc.value?.date || '',
+      updated: () => paperFields(doc.value).updated,
+      words: () => paperFields(doc.value).words,
+      ...ogExtraProps(doc.value),
+    },
+    {
+      alt: () => shareTitle.value,
+    },
+  )
 }
 useShareMeta({
   title: () => shareTitle.value,
   description: () => doc.value?.description,
   type: 'article',
-  image: () => override.value === undefined ? false : override.value,
+  image: () => (override.value === undefined ? false : override.value),
 })
 </script>
 
@@ -83,12 +90,8 @@ useShareMeta({
           {{ t('obs.kicker') }}
         </NuxtLink>
         ·
-        <NuxtLink :to="link(sitePath(id))">
-          #{{ id }}
-        </NuxtLink>
-        <template v-if="doc.path !== site.path">
-          · {{ site.title }}
-        </template>
+        <NuxtLink :to="link(sitePath(id))"> #{{ id }} </NuxtLink>
+        <template v-if="doc.path !== site.path"> · {{ site.title }} </template>
       </p>
       <h1>{{ doc.title }}</h1>
       <p
@@ -105,7 +108,8 @@ useShareMeta({
           :href="doc.url"
           target="_blank"
           rel="noopener noreferrer"
-        >{{ doc.url }}</a>
+          >{{ doc.url }}</a
+        >
       </p>
     </header>
     <div class="l-prose l-md">
