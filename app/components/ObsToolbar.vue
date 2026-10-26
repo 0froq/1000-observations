@@ -8,7 +8,7 @@ const { locale, t } = useI18n()
 const { q, tags, sort, setSearch, setTags, clearTags, setSort } = useObservationFilters()
 
 const searchDraft = ref(q.value)
-watch(q, (v) => {
+watch(q, v => {
   searchDraft.value = v
 })
 
@@ -18,15 +18,17 @@ function onSearchInput() {
   searchTimer = setTimeout(setSearch, 220, searchDraft.value)
 }
 
-function tagLabel(tag: typeof OBSERVATION_TAGS[number]): string {
+function tagLabel(tag: (typeof OBSERVATION_TAGS)[number]): string {
   const labels = OBSERVATION_TAG_LABELS[tag]
   return locale.value === 'zh' ? labels.zh : labels.en
 }
 
-const tagOptions = computed(() => OBSERVATION_TAGS.map(tag => ({
-  value: tag,
-  label: tagLabel(tag),
-})))
+const tagOptions = computed(() =>
+  OBSERVATION_TAGS.map(tag => ({
+    value: tag,
+    label: tagLabel(tag),
+  })),
+)
 
 const selected = computed<ObservationTag[]>({
   get: () => tags.value,
@@ -50,7 +52,7 @@ function onSortChange(event: Event) {
         autocomplete="off"
         :placeholder="t('obs.searchPlaceholder')"
         @input="onSearchInput"
-      >
+      />
     </label>
     <div class="obs-sort">
       <label for="obs-sort">{{ t('obs.sort') }}</label>

@@ -3,7 +3,7 @@ import { defineConfig } from 'cf/config'
 export default defineConfig({
   worker: {
     name: '1000-observations',
-    compatibilityDate: '2026-10-04',
+    compatibilityDate: '2026-10-12',
     observability: {
       enabled: true,
       traces: {

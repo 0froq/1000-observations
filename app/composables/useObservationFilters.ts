@@ -3,9 +3,11 @@ import type { SiteSort } from './useSites'
 import { isObservationTag, OBSERVATION_TAGS } from '#shared/observation-tags'
 
 function parseTags(raw: unknown): ObservationTag[] {
-  if (typeof raw !== 'string' || !raw.trim())
-    return []
-  return raw.split(',').map(s => s.trim()).filter(isObservationTag)
+  if (typeof raw !== 'string' || !raw.trim()) return []
+  return raw
+    .split(',')
+    .map(s => s.trim())
+    .filter(isObservationTag)
 }
 
 function parseSort(raw: unknown): SiteSort {
@@ -24,10 +26,8 @@ export function useObservationFilters() {
   function pushQuery(patch: Record<string, string | undefined>) {
     const next = { ...route.query }
     for (const [key, value] of Object.entries(patch)) {
-      if (value == null || value === '')
-        delete next[key]
-      else
-        next[key] = value
+      if (value == null || value === '') delete next[key]
+      else next[key] = value
     }
     router.replace({ query: next })
   }
@@ -43,10 +43,8 @@ export function useObservationFilters() {
 
   function toggleTag(tag: ObservationTag) {
     const set = new Set(tags.value)
-    if (set.has(tag))
-      set.delete(tag)
-    else
-      set.add(tag)
+    if (set.has(tag)) set.delete(tag)
+    else set.add(tag)
     setTags([...set])
   }
 

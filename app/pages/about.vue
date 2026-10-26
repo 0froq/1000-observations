@@ -4,18 +4,27 @@ const copy = useCopy()
 const contentPath = useContentPath()
 
 const files = useRuntimeConfig().public.publicFiles
-const override = computed(() => explicitContentCover({
-  collection: 'pages',
-  path: contentPath('/about'),
-}, path => hasShareFile(files, path)))
+const override = computed(() =>
+  explicitContentCover(
+    {
+      collection: 'pages',
+      path: contentPath('/about'),
+    },
+    path => hasShareFile(files, path),
+  ),
+)
 if (!override.value) {
-  defineOgImage('Paper', {
-    title: () => t('obs.aboutTitle'),
-    description: () => t('obs.aboutLede') || t('obs.indexLede'),
-    words: 0,
-  }, {
-    alt: () => t('obs.aboutTitle'),
-  })
+  defineOgImage(
+    'Paper',
+    {
+      title: () => t('obs.aboutTitle'),
+      description: () => t('obs.aboutLede') || t('obs.indexLede'),
+      words: 0,
+    },
+    {
+      alt: () => t('obs.aboutTitle'),
+    },
+  )
 }
 useShareMeta({
   title: () => t('obs.aboutTitle'),

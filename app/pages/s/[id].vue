@@ -15,8 +15,7 @@ if (number.value == null)
 const id = computed(() => formatObservationId(number.value!))
 const { site, groups, foldable } = await useSiteTree(id)
 
-if (!site.value)
-  throw createError({ statusCode: 404, statusMessage: 'Not found', fatal: true })
+if (!site.value) throw createError({ statusCode: 404, statusMessage: 'Not found', fatal: true })
 </script>
 
 <template>

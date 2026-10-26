@@ -9,15 +9,13 @@ export function formatObservationId(n: number): string {
 
 export function parseObservationId(id: string): number | null {
   const n = Number.parseInt(id, 10)
-  if (!Number.isFinite(n) || n < 1 || n > OBSERVATION_GOAL)
-    return null
+  if (!Number.isFinite(n) || n < 1 || n > OBSERVATION_GOAL) return null
   return n
 }
 
 /** A site directory: `/s/0001`. */
 export function sitePath(id: string | number): string {
   const num = typeof id === 'number' ? id : parseObservationId(id)
-  if (num == null)
-    return '/'
+  if (num == null) return '/'
   return `/s/${formatObservationId(num)}`
 }

@@ -8,38 +8,47 @@ const { sites } = useSitesLoader()
 
 const counts = computed(() => {
   const map = new Map<string, number>()
-  for (const tag of OBSERVATION_TAGS)
-    map.set(tag, 0)
+  for (const tag of OBSERVATION_TAGS) map.set(tag, 0)
   for (const obs of sites.value ?? []) {
-    for (const tag of obs.tags ?? [])
-      map.set(tag, (map.get(tag) ?? 0) + 1)
+    for (const tag of obs.tags ?? []) map.set(tag, (map.get(tag) ?? 0) + 1)
   }
   return map
 })
 
-const entries = computed(() => OBSERVATION_TAGS.map((tag) => {
-  const labels = OBSERVATION_TAG_LABELS[tag]
-  return {
-    tag,
-    label: locale.value === 'zh' ? labels.zh : labels.en,
-    count: counts.value.get(tag) ?? 0,
-  }
-}))
+const entries = computed(() =>
+  OBSERVATION_TAGS.map(tag => {
+    const labels = OBSERVATION_TAG_LABELS[tag]
+    return {
+      tag,
+      label: locale.value === 'zh' ? labels.zh : labels.en,
+      count: counts.value.get(tag) ?? 0,
+    }
+  }),
+)
 
 const files = useRuntimeConfig().public.publicFiles
 const contentPath = useContentPath()
-const override = computed(() => explicitContentCover({
-  collection: 'pages',
-  path: contentPath('/tags'),
-}, path => hasShareFile(files, path)))
+const override = computed(() =>
+  explicitContentCover(
+    {
+      collection: 'pages',
+      path: contentPath('/tags'),
+    },
+    path => hasShareFile(files, path),
+  ),
+)
 if (!override.value) {
-  defineOgImage('Paper', {
-    title: () => t('obs.tagsTitle'),
-    description: () => t('obs.tagsLede') || t('obs.indexLede'),
-    words: 0,
-  }, {
-    alt: () => t('obs.tagsTitle'),
-  })
+  defineOgImage(
+    'Paper',
+    {
+      title: () => t('obs.tagsTitle'),
+      description: () => t('obs.tagsLede') || t('obs.indexLede'),
+      words: 0,
+    },
+    {
+      alt: () => t('obs.tagsTitle'),
+    },
+  )
 }
 useShareMeta({
   title: () => t('obs.tagsTitle'),
@@ -79,7 +88,8 @@ useShareMeta({
             <span
               class="tag-spread-count"
               :class="{ 'is-empty': entry.count === 0 }"
-            >{{ entry.count }}</span>
+              >{{ entry.count }}</span
+            >
           </NuxtLink>
         </li>
       </ol>
